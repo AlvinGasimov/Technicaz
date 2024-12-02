@@ -1,0 +1,160 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+
+{% block title %} Shopping Cart {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.3s" data-wow-duration="1500ms">
+                        <h2>Cart page</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.3s" data-wow-duration="1500ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">Home</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">Cart page</li>
+                            </ul>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="cart-area">
+        <div class="container">
+        
+            <div class="row text-right-rtl">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="cart-table-box">
+                        <div class="table-outer">
+                            <table class="cart-table">
+                                <thead class="cart-header clearfix">
+                                    <tr>
+                                        <th></th>
+                                        <th class="prod-column">Product Name</th>
+                                        <th class="hide-me"></th>
+                                        <th class="price">Price</th>
+                                        <th>Quantity</th>
+                                        <th>Subtotal</th>
+                                    </tr>    
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="remove">
+                                                <span class="flaticon-multiply"></span>
+                                            </div>
+                                        </td>
+                                        <td colspan="2" class="prod-column">
+                                            <div class="column-box">
+                                                <div class="prod-thumb">
+                                                    <a href="#"><img src="{% static 'images/shop/product-thumb-1.jpg" alt=""></a>
+                                                </div>
+                                                <div class="title">
+                                                    <h3 class="prod-title">Boneless Beef</h3>
+                                                </div>    
+                                            </div>
+                                        </td>
+                                        <td class="price">250 ₼</td>
+                                        <td class="qty">
+                                            <div class="input-box">
+                                                <input class="quantity-spinner" type="text" value="1" name="quantity">
+                                            </div>
+                                        </td>
+                                        <td class="sub-total">250 ₼</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="remove">
+                                                <span class="flaticon-multiply"></span>
+                                            </div>
+                                        </td>
+                                        <td colspan="2" class="prod-column">
+                                            <div class="column-box">
+                                                <div class="prod-thumb">
+                                                    <a href="#"><img src="{% static 'images/shop/product-thumb-2.jpg" alt=""></a>
+                                                </div>
+                                                <div class="title">
+                                                    <h3 class="prod-title">Beef Tongue</h3>
+                                                </div>    
+                                            </div>
+                                        </td>
+                                        <td class="price">250 ₼</td>
+                                        <td class="qty">
+                                            <input class="quantity-spinner" type="text" value="2" name="quantity">
+                                        </td>
+                                        <td class="sub-total">250 ₼</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="remove">
+                                                <span class="flaticon-multiply"></span>
+                                            </div>
+                                        </td>
+                                        <td colspan="2" class="prod-column">
+                                            <div class="column-box">
+                                                <div class="prod-thumb">
+                                                    <a href="#"><img src="{% static 'images/shop/product-thumb-3.jpg" alt=""></a>
+                                                </div>
+                                                <div class="title">
+                                                    <h3 class="prod-title">Mutton Ghee Roast</h3>
+                                                </div>    
+                                            </div>
+                                        </td>
+                                        <td class="price">250 ₼</td>
+                                        <td class="qty">
+                                            <input class="quantity-spinner" type="text" value="2" name="quantity">
+                                        </td>
+                                        <td class="sub-total">250 ₼</td>
+                                    </tr>
+                                </tbody>    
+                            </table>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+            
+            <div class="row cart-button-box">
+                <div class="col-xl-6 col-lg-7 col-md-12 col-sm-12">
+                    <div class="apply-coupon">
+                        <div class="inner">
+                            <input type="text" name="coupon-code" value="" placeholder="Enter coupon code...">
+                            <div class="apply-coupon-button">        
+                                <button class="btn-one" type="submit"><span class="txt">Apply Coupon</span></button>
+                            </div> 
+                        </div>       
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-5 col-md-12 col-sm-12">
+                    <div class="update-cart pull-right">
+                        <button class="btn-one" type="button"><span class="txt">Update Now</span></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row text-right-rtl">
+                <div class="col-xl-12">
+                    <div class="cart-totals-form">
+                        <h3>Cart Totals</h3>
+                        <form class="cart-totals" method="post" action="#">
+                            <ul>
+                                <li>Subtotal <span>150 ₼</span></li>
+                                <li>Order Total <span class="total">150 ₼</span></li>
+                            </ul>
+                            <button class="btn-one" type="button"><span class="txt">Proceed to Checkout</span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>         
+
+{% endblock %}
