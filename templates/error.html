@@ -1,7 +1,8 @@
 {% extends "partials/_base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %} Error {% endblock %}
+{% block title %} {% trans 'Error' %} {% endblock %}
 
 {% block content %}
 
@@ -10,9 +11,9 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="error-content text-center">
-                        <h4>Səhifə tapılmadı</h4>
+                        <h4>{% trans 'Səhifə tapılmadı' %}</h4>
                         <div class="title thm_clr1">404</div>
-                        <p>Opps... Üzr istəyirik, axtarışınıza uyğun səhifə tapılmadı!</p>
+                        <p>{% trans 'Opps... Üzr istəyirik, axtarışınıza uyğun səhifə tapılmadı!' %}</p>
                         <div class="btns-box">
                             <a class="btn-one" href="{% url 'base:index' %}"><span class="txt">Ana səhifə</span></a>
                         </div>

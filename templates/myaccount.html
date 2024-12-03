@@ -1,7 +1,8 @@
 {% extends "partials/_base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %} My Account {% endblock %}
+{% block title %} {% trans 'Mənim Hesabım' %} {% endblock %}
 
 {% block content %}
 
@@ -12,14 +13,14 @@
                     <div class="inner-content text-center clearfix">
                         <div class="title wow slideInDown animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
-                            <h2>Hesabım</h2>
+                            <h2>{% trans 'Hesabım' %}</h2>
                         </div>
                         <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
                             <ul class="clearfix">
-                                <li><a href="{% url 'base:index' %}">Ana səhifə</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li class="active">Hesabım</li>
+                                <li class="active">{% trans 'Hesabım' %}</li>
                             </ul>
                         </div>
                     </div>
@@ -35,18 +36,18 @@
                     <div class="account-sideMe d-lg-block">
                         <ul class="account-links">
                             <li>
-                                <a href="{% url 'account:account' %}" class="active">Hesabım</a>
+                                <a href="{% url 'account:account' %}" class="active">{% trans 'Hesabım' %}</a>
                             </li>
                             <li>
-                                <a href="{% url 'shop:orders_list' %}" class="">Sifarişlərim</a>
-                            </li>
-                            <li class="list-separator"></li>
-                            <li>
-                                <a href="{% url 'shop:favorites_list' %}" class="">Sevimlilərim</a>
+                                <a href="{% url 'shop:orders_list' %}" class="">{% trans 'Sifarişlərim' %}</a>
                             </li>
                             <li class="list-separator"></li>
                             <li>
-                                <a href="{% url 'account:logout' %}">Çıxış et</a>
+                                <a href="{% url 'shop:favorites_list' %}" class="">{% trans 'Sevimlilərim' %}</a>
+                            </li>
+                            <li class="list-separator"></li>
+                            <li>
+                                <a href="{% url 'account:logout' %}">{% trans 'Çıxış et' %}</a>
                             </li>
                         </ul>
                     </div>
@@ -91,14 +92,14 @@
 
                             </div>
                             <div class="d-flex justify-content-lg-end my-button ">
-                                <button class="button my-button-change" type="submit">Yadda saxla</button>
+                                <button class="button my-button-change" type="submit">{% trans 'Yadda saxla' %}</button>
                             </div>
                         </form>
 
                         <form name="password" method="post" class="validate"
                             onsubmit=" return validatePasswordForm()">
                             <div class="my-account-form">
-                                <h5 class="mb-4">Şifrəni dəyişdir</h5>
+                                <h5 class="mb-4">{% trans 'Şifrəni dəyişdir' %}</h5>
 
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -123,11 +124,11 @@
                             </div>
 
                             <div class="d-flex justify-content-lg-end ">
-                                <button class="button my-button-change" type="submit">Yadda saxla</button>
+                                <button class="button my-button-change" type="submit">{% trans 'Yadda saxla' %}</button>
                             </div>
 
                             <div class="form-group">
-                                <label for="account_captchaCode" class="required">Captcha code</label>
+                                <label for="account_captchaCode" class="required">{% trans 'Captcha code' %}</label>
                                 <input type="hidden" name="captchaCode" id="captchaCode">
                                 <script>
                                     grecaptcha.ready(function () {

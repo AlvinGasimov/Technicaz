@@ -7,23 +7,23 @@ class ContactForm(forms.ModelForm):
         fields = ['name', 'email', 'phone', 'subject', 'message']
         widgets = {
             'name': forms.TextInput(attrs={
-                'placeholder': 'Adınız',
+                'placeholder': 'Full name',
                 'class': 'comment-form__input-box'
             }),
             'email': forms.EmailInput(attrs={
-                'placeholder': 'Email ünvanı',
+                'placeholder': 'Email',
                 'class': 'comment-form__input-box'
             }),
             'subject': forms.TextInput(attrs={
-                'placeholder': 'Mövzu',
+                'placeholder': 'Subject',
                 'class': 'comment-form__input-box'
             }),
             'phone': forms.TextInput(attrs={
-                'placeholder': 'Telefon Nömrəsi',
+                'placeholder': 'Phone Number',
                 'class': 'from-control phone-mask',
             }),
             'message': forms.Textarea(attrs={
-                'placeholder': 'Mesaj yazın',
+                'placeholder': 'Message',
                 'class': 'comment-form__input-box text-message-box'
             })
         }

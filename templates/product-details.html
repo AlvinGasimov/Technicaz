@@ -1,7 +1,8 @@
 {% extends "partials/_base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %} Product Details {% endblock %}
+{% block title %} {% trans 'Məhsul Detalları' %} {% endblock %}
 
 {% block css %} 
 
@@ -21,7 +22,7 @@
                         <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
                             <ul class="clearfix">
-                                <li><a href="{% url 'base:index' %}">Ana səhifə</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
                                 <li class="active">{{ product.name }}</li>
                             </ul>
@@ -62,7 +63,7 @@
                                                 </a>
                                             </div>
                                         {% empty %}
-                                            <p>No additional images available for this product.</p>
+                                            <p>{% trans 'Bu məhsul üçün heç bir şəkil yoxdur.' %}</p>
                                         {% endfor %}
                                     </div>
                                     <div class="swiper-button-next"></div>
@@ -94,7 +95,7 @@
                                 </div>
                                 
                                 <div class="price-list ratting">
-                                    <p>1kg üçün olan qiymət:</p>
+                                    <p>{% trans '1kg üçün olan qiymət:' %}</p>
                                     {% if product.discount_price %}
                                         <p class="current_price_static">{{ product.discount_price }} ₼</p>
                                         <span class="discounted-price old_price">{{ product.price }} ₼</span>
@@ -108,7 +109,7 @@
                                     <div class="calculate-price">
                                         <select name="weight" class="cekiSelect" id="weightSelect">
                                             {% for weight in weights %}
-                                                <option value="{{ weight.value }}" data-price="{{ weight.price }}" {% if forloop.first %}selected{% endif %}>
+                                                <option value="{{ weight.value }}" data-price="{{ weight.price }}">
                                                     {{ weight.value }} kg
                                                 </option>
                                             {% endfor %}
@@ -127,15 +128,15 @@
                                         <div class="product-quantity-box">
                                             <div class="right">
                                                 <div class="cart-box">
-                                                    <button type="submit" class="addtocart">Səbətə at</button>
+                                                    <button type="submit" class="addtocart">{% trans 'Səbətə at' %}</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                                 
-                                <h6 class="details-info"><span>Kod:</span> <a href="{% url 'product:product_detail' product.slug %}">{{ product.code }}</a></h6>
-                                <h6 class="details-info"><span>Kateqoriya:</span> <a href="{% url 'product:product_detail' product.slug %}">{{ product.category.name }}</a></h6>
+                                <h6 class="details-info"><span>{% trans 'Kod:' %}</span> <a href="{% url 'product:product_detail' product.slug %}">{{ product.code }}</a></h6>
+                                <h6 class="details-info"><span>{% trans 'Kateqoriya:' %}</span> <a href="{% url 'product:product_detail' product.slug %}">{{ product.category.name }}</a></h6>
                             </div>
                         </div>
                         
@@ -145,8 +146,8 @@
                         <div class="col-md-12">
                             <div class="product-tab-box tabs-box">
                                 <ul class="tab-btns tab-buttons clearfix">
-                                    <li data-tab="#desc" class="tab-btn active-btn"><span>Təsvir</span></li>
-                                    <li data-tab="#review" class="tab-btn"><span>Özəlliklər</span></li>
+                                    <li data-tab="#desc" class="tab-btn active-btn"><span>{% trans 'Təsvir' %}</span></li>
+                                    <li data-tab="#review" class="tab-btn"><span>{% trans 'Özəlliklər' %}</span></li>
                                 </ul>
                                 <div class="tabs-content">
                                     <div class="tab active-tab" id="desc" style="display: block;">
@@ -167,9 +168,9 @@
                                                                 <table class="order-table">
                                                                     <thead class="order-header clearfix">
                                                                         <tr>
-                                                                            <th class="prod-column">Özəlliyin adı
+                                                                            <th class="prod-column">{% trans 'Özəlliyin adı' %}
                                                                             </th>
-                                                                            <th>Özəlliyin özü</th>
+                                                                            <th>{% trans 'Özəlliyin özü' %}</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>

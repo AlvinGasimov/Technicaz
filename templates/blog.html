@@ -1,7 +1,8 @@
 {% extends "partials/_base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %} Blog {% endblock %}
+{% block title %} {% trans 'Blog' %} {% endblock %}
 
 {% block content %}
 
@@ -12,14 +13,14 @@
                     <div class="inner-content text-center clearfix">
                         <div class="title wow slideInDown animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
-                            <h2>Bloqlar</h2>
+                            <h2>{% trans 'Bloqlar' %}</h2>
                         </div>
                         <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
                             <ul class="clearfix">
-                                <li><a href="{% url 'base:index' %}">Ana səhifə</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li class="active">Bloqlar</li>
+                                <li class="active">{% trans 'Bloqlar' %}</li>
                             </ul>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <div class="alert alert-warning" role="alert"> Hələ layihə əlavə edilməyib </div>
+                    <div class="alert alert-warning" role="alert"> {% trans 'Hələ blog əlavə edilməyib' %} </div>
                 {% endif %}
             </div>
             <div class="row">

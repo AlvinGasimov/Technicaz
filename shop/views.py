@@ -4,6 +4,9 @@ from django.views.generic import ListView, DetailView
 from django.http import JsonResponse
 from .models import Favorite, CartItem, Order, Product, OrderItem
 from product.models import *
+from decimal import Decimal, InvalidOperation
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 
 # --------- FAVORITES ---------
 
@@ -41,17 +44,17 @@ def cart_list(request):
 @login_required
 def add_to_cart(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
-    
     selected_weight_value = request.POST.get('weight')
-    
+
     if not selected_weight_value:
         return redirect('product:product_detail', product_slug=product.slug)
 
     try:
+        selected_weight_value = Decimal(selected_weight_value)
         selected_weight = get_object_or_404(Weight, value=selected_weight_value)
-    except Weight.DoesNotExist:
+    except (InvalidOperation, Weight.DoesNotExist):
         return redirect('product:product_detail', product_slug=product.slug)
-    
+
     cart_item, created = CartItem.objects.get_or_create(
         user=request.user,
         product=product,

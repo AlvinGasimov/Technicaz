@@ -1,7 +1,8 @@
 {% extends "partials/_base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %} Cart {% endblock %}
+{% block title %} {% trans 'Səbət' %} {% endblock %}
 
 {% block content %}
 
@@ -12,14 +13,14 @@
                     <div class="inner-content text-center clearfix">
                         <div class="title wow slideInDown animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
-                            <h2>Səbət</h2>
+                            <h2>{% trans 'Səbət' %}</h2>
                         </div>
                         <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
                             <ul class="clearfix">
-                                <li><a href="{% url 'base:index' %}">Ana səhifə</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li class="active">Səbət</li>
+                                <li class="active">{% trans 'Səbət' %}</li>
                             </ul>
                         </div>
                     </div>
@@ -35,7 +36,7 @@
                 <div class="col-sm-12">
                     <div class="form order-info">
                         <div class="title">
-                            <h3>Sifariş(lərin)iz</h3>
+                            <h3>{% trans 'Sifariş(lərin)iz' %}</h3>
                         </div>
     
                         <div class="order-info-table-box">
@@ -43,11 +44,11 @@
                                 <table class="order-table">
                                     <thead class="order-header clearfix">
                                         <tr>
-                                            <th class="prod-column">Məhsul</th>
-                                            <th class="price-column">Qiymət</th>
-                                            <th class="weight-column">Çəki</th>
-                                            <th class="total-price-column">Ümumi Qiymət</th>
-                                            <th>Sil</th>
+                                            <th class="prod-column">{% trans 'Məhsul' %}</th>
+                                            <th class="price-column">{% trans 'Qiymət' %}</th>
+                                            <th class="weight-column">{% trans 'Çəki' %}</th>
+                                            <th class="total-price-column">{% trans 'Ümumi Qiymət' %}</th>
+                                            <th>{% trans 'Sil' %}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -87,7 +88,7 @@
     
                                         <tr>
                                             <td colspan="3">
-                                                <h3>Sifariş cəmi</h3>
+                                                <h3>{% trans 'Sifariş cəmi' %}</h3>
                                             </td>
                                             <td class="sub-total">{{ total_price|floatformat:2 }} ₼</td>
                                         </tr>
@@ -99,18 +100,18 @@
     
                         <div class="placeorder-button text-right">
                             <a class="btn-one" href="{% url 'shop:create_order' %}">
-                                <span class="txt">Sifariş et</span>
+                                <span class="txt">{% trans 'Sifariş et' %}</span>
                             </a>
                         </div>
                     </div>
                 </div>
                 {% else %}
                 <div class="error-content text-center">
-                    <h4>Səbətiniz boşdur!</h4>
+                    <h4>{% trans 'Səbətiniz boşdur!' %}</h4>
                     <div class="title thm_clr1"></div>
-                    <p>Alış-verişə davam edin!</p>
+                    <p>{% trans 'Alış-verişə davam edin!' %}</p>
                     <div class="btns-box">
-                        <a class="btn-one" href="{% url 'base:index' %}"><span class="txt">Ana səhifə</span></a>
+                        <a class="btn-one" href="{% url 'base:index' %}"><span class="txt">{% trans 'Ana səhifə' %}</span></a>
                     </div>
                 </div>
                 {% endif %}

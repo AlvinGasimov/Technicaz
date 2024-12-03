@@ -100,10 +100,10 @@
                             <nav class="main-menu style1 navbar-expand-md navbar-light">
                                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                     <ul class="navigation clearfix">
-                                        <li><a href="{% url 'base:index' %}" class="{% if request.path == '/' %} active {% endif %}" >Ana səhifə</a></li>
-                                        <li><a href="{% url 'base:about' %}" class="{% if request.path == '/about' %} active {% endif %}">Haqqımızda</a></li>
+                                        <li><a href="{% url 'base:index' %}" class="{% if request.path == '/' %} active {% endif %}" >{% trans 'Ana səhifə' %}</a></li>
+                                        <li><a href="{% url 'base:about' %}" class="{% if request.path == '/about' %} active {% endif %}">{% trans 'Haqqımızda' %}</a></li>
                                         <li class="dropdown">
-                                            <a href="{% url 'product:products' %}" class="{% if not request.GET.category %}active{% endif %}">Məhsullar</a>
+                                            <a href="{% url 'product:products' %}" class="{% if not request.GET.category %}active{% endif %}">{% trans 'Məhsullar' %}</a>
                                             <ul>
                                                 {% for category in product_categories %}
                                                     <li>
@@ -116,9 +116,9 @@
                                             </ul>
 
                                         </li>
-                                        <li><a href="{% url 'base:index' %}#partnors" class="{% if request.path == '/' %} active {% endif %}" >Partnyorlar</a></li>
-                                        <li><a href="{% url 'blog:blogs' %}" class="{% if request.path in '/blogs' %} active {% endif %}" >Bloq</a   ></li>
-                                        <li><a href="{% url 'contact:contact' %}" class="{% if request.path == '/contact' %} active {% endif %}">Əlaqə</a></li>
+                                        <li><a href="{% url 'base:index' %}#partnors" class="{% if request.path == '/' %} active {% endif %}" >{% trans 'Partnyorlar' %}</a></li>
+                                        <li><a href="{% url 'blog:blogs' %}" class="{% if request.path in '/blogs' %} active {% endif %}" >{% trans 'Bloq' %}</a></li>
+                                        <li><a href="{% url 'contact:contact' %}" class="{% if request.path == '/contact' %} active {% endif %}">{% trans 'Əlaqə' %}</a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -169,7 +169,7 @@
                                 </div>
                             {% else %}
                                 <a href="{% url 'account:login' %}" class="user-acc">
-                                    <span class="icon-user"></span> <span class="user-name">Login</span>
+                                    <span class="icon-user"></span> <span class="user-name">{% trans 'Giriş et' %}</span>
                                 </a>
                             {% endif %}
 

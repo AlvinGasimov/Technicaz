@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
+from django.utils.translation import get_language
+from unidecode import unidecode
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=255)
@@ -8,14 +10,20 @@ class ProductCategory(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            current_language = get_language()
+            
+            if current_language == "az":
+                self.slug = slugify(self.name, allow_unicode=True)
+            else:
+                self.slug = slugify(unidecode(self.name))
+        
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
 class Weight(models.Model):
-    value = models.DecimalField(max_digits=10, decimal_places=2)
+    value = models.IntegerField()
     
     def __str__(self):
         return f"{self.value}"

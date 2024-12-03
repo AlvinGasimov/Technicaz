@@ -66,4 +66,6 @@ class OrderItem(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"{self.product.name} x {self.quantity}"
+        if self.product:
+            return f"{self.product.name} x {self.quantity}"
+        return f"Unknown Product x {self.quantity}"

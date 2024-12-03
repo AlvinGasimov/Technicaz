@@ -1,7 +1,8 @@
 {% extends "partials/_base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %} Ana Sayfa {% endblock %}
+{% block title %} {% trans 'Ana Səhifə' %} {% endblock %}
 
 {% block content %}
 
@@ -21,7 +22,7 @@
                                 </div>
                                 <h3>{{ home.description|slice:":100" }}</h3>
                                 <div class="btns-box">
-                                    <a class="btn-one" href="{% url 'base:about' %}"><span class="txt">Daha çox</span></a>
+                                    <a class="btn-one" href="{% url 'base:about' %}"><span class="txt">{% trans 'Daha çox' %}</span></a>
                                 </div>
                             </div>
                         </div>
@@ -36,9 +37,9 @@
             <div class="sec-title text-center">
                 <div class="sub-title">
                     <span class="left"></span>
-                    <h4>Niyə biz?</h4><span class="right"></span>
+                    <h4>{% trans 'Niyə biz?' %}</h4><span class="right"></span>
                 </div>
-                <h2>Özəlliklərimiz</h2>
+                <h2>{% trans 'Özəlliklərimiz' %}</h2>
             </div>
             <div class="row">
                 {% for feature in features %}
@@ -88,7 +89,7 @@
                     <div class="about-style1-content-box text-right-rtl">
                         <div class="sec-title">
                             <div class="sub-title">
-                                <h4>About {{ about.title }}</h4><span class="right"></span>
+                                <h4>{{ about.title }}</h4><span class="right"></span>
                             </div>
                             <h2>{{ about.title }}</h2>
                         </div>
@@ -112,9 +113,9 @@
             <div class="sec-title text-center">
                 <div class="sub-title">
                     <span class="left"></span>
-                    <h4 class="thm_clr1">Məhsullarımız</h4><span class="right"></span>
+                    <h4 class="thm_clr1">{% trans 'Məhsullarımız' %}</h4><span class="right"></span>
                 </div>
-                <h2>Məhsullarımızla tanış olun</h2>
+                <h2>{% trans 'Məhsullarımızla tanış olun' %}</h2>
             </div>
             <div class="row text-right-rtl">
                 <div class="col-xl-12">
@@ -159,7 +160,7 @@
                                                     <form method="POST" action="{% url 'shop:add_to_cart' product.slug %}" id="addToCartForm">
                                                         {% csrf_token %}
                                                         <button type="submit" class="btn-one">
-                                                            <span class="txt">Səbətə at</span>
+                                                            <span class="txt">{% trans 'Səbətə at' %}</span>
                                                         </button>
                                                     </form>
                                                 </div>
@@ -185,7 +186,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="product-style1-button text-center">
-                        <a class="btn-one" href="{% url 'product:products' %}"><span class="txt">Daha çox</span></a>
+                        <a class="btn-one" href="{% url 'product:products' %}"><span class="txt">{% trans 'Daha çox' %}</span></a>
                     </div>
                 </div>
             </div>
@@ -221,9 +222,9 @@
                     <div class="faq-style1-content">
                         <div class="sec-title">
                             <div class="sub-title">
-                                <h4 class="thm_clr1">Suallar</h4><span class="right"></span>
+                                <h4 class="thm_clr1">{% trans 'Suallar' %}</h4><span class="right"></span>
                             </div>
-                            <h2>Tez-tez verilen suallar</h2>
+                            <h2>{% trans 'Tez-tez verilen suallar' %}</h2>
                         </div>
                         <div class="shape1"><img src="{% static 'images/shape/shape-3.png' %}" alt="" /></div>
                         <div class="accordion-box">
@@ -271,9 +272,9 @@
                     <div class="shape1 float-bob-y"><img src="{% static 'images/shape/shape-6.png" alt="" /></div>
                     <div class="sec-title">
                         <div class="sub-title text-center">
-                            <h4 class="thm_clr1">Partnyorlarımız</h4><span class="right"></span>
+                            <h4 class="thm_clr1">{% trans 'Partnyorlarımız' %}</h4><span class="right"></span>
                         </div>
-                        <h2 class="text-center">Partnyorlarımızla tanış olun</h2>
+                        <h2 class="text-center">{% trans 'Partnyorlarımızla tanış olun' %}</h2>
                     </div>
                     <div class="testimonial-carousel2 owl-carousel owl-theme owl-nav-style-one">
                         {% for partner in partners %}
@@ -293,11 +294,11 @@
         <div class="container">
             <div class="slogan-content-box text-right-rtl">
                 <div class="title-box">
-                    <h2>Məhsullarımızı əldə etmək üçün istədiyiniz zaman zəng edə bilərsiniz</h2>
+                    <h2>{% trans 'Məhsullarımızı əldə etmək üçün istədiyiniz zaman zəng edə bilərsiniz' %} </h2>
                 </div>
                 <div class="button-box">
                     <a class="btn-one" href="tel:{{ navigation_item.phone_number }"><span
-                            class="flaticon-phone-call-1 icon_phn txt"></span><span class="txt">Zəng: {{ navigation_item.phone_number }} </span></a>
+                            class="flaticon-phone-call-1 icon_phn txt"></span><span class="txt">{% trans 'Zəng' %} : {{ navigation_item.phone_number }} </span></a>
                 </div>
             </div>
         </div>
@@ -326,7 +327,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -336,9 +336,9 @@
             <div class="sec-title text-center">
                 <div class="sub-title">
                     <span class="left"></span>
-                    <h4>Bloqlarımız</h4><span class="right"></span>
+                    <h4>{% trans 'Bloqlarımız' %}</h4><span class="right"></span>
                 </div>
-                <h2>Bloqlarımızla tanış olun</h2>
+                <h2>{% trans 'Bloqlarımızla tanış olun' %}</h2>
             </div>
             <div class="row text-right-rtl">
                 {% for blog in last_3_blogs %}
@@ -361,7 +361,7 @@
 
                                 </div>
                                 <div class="button-box">
-                                    <a class="btn-one" href="{% url 'blog:blog-details' blog.slug %}"><span class="txt">Daha çox</span></a>
+                                    <a class="btn-one" href="{% url 'blog:blog-details' blog.slug %}"><span class="txt">{% trans 'Daha çox' %}</span></a>
                                 </div>
                             </div>
                         </div>

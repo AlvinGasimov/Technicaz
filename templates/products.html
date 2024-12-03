@@ -1,7 +1,8 @@
 {% extends "partials/_base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %} Products {% endblock %}
+{% block title %} {% trans 'Məhsullar' %} {% endblock %}
 
 {% block content %}
 
@@ -12,14 +13,14 @@
                     <div class="inner-content text-center clearfix">
                         <div class="title wow slideInDown animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
-                            <h2>Məhsullarımız</h2>
+                            <h2>{% trans 'Məhsullarımız' %}</h2>
                         </div>
                         <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
                             data-wow-duration="1000ms">
                             <ul class="clearfix">
-                                <li><a href="{% url 'base:index' %}">Ana səhifə</a></li>
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li class="active">Məhsullarımız</li>
+                                <li class="active">{% trans 'Məhsullarımız' %}</li>
                             </ul>
                         </div>
                     </div>
@@ -37,7 +38,7 @@
                         <div class="single-sidebar-style2 wow fadeInUp animated" data-wow-delay="0.2s"
                             data-wow-duration="1200ms">
                             <div class="shop-sidebar-title">
-                                <h3>Kateqoriyalara görə</h3>
+                                <h3>{% trans 'Kateqoriyalara görə' %}</h3>
                             </div>
                             <ul class="sidebar-categories-box">
                                 {% for category in product_categories %}
@@ -107,7 +108,7 @@
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                <div class="alert alert-warning" role="alert"> Hələ məhsul əlavə edilməyib </div>
+                                <div class="alert alert-warning" role="alert"> {% trans 'Hələ məhsul əlavə edilməyib' %} </div>
                             {% endif %}
 
                         </div>

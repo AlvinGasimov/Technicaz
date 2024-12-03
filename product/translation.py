@@ -14,5 +14,3 @@ class ProductTranslationOptions(TranslationOptions):
 @register(ProductFeatures)
 class ProductFeaturesTranslationOptions(TranslationOptions):
     fields = ('feature_name', 'feature_value',)
-    
-
