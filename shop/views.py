@@ -7,10 +7,18 @@ from product.models import *
 from decimal import Decimal, InvalidOperation
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # --------- FAVORITES ---------
 
+# @login_required(login_url='/user/login')
 def favorite_list(request):
+    if not request.user.is_authenticated:
+        return render(request, 'favorites.html', {
+            'favorites': [], 
+            'message': 'Favoritlərinizi görmək üçün əvvəlcə daxil olun.'
+        })
+        
     favorites = Favorite.objects.filter(user=request.user)
     return render(request, 'favorites.html', {'favorites': favorites})
 

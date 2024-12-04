@@ -7,9 +7,13 @@ from shop.models import Favorite
 def products(request):
     category_slug = request.GET.get('category')
     search_query = request.GET.get('search', '')
-    
     products = Product.objects.all()
-    favorites = Favorite.objects.filter(user=request.user).values_list('product', flat=True)
+    
+    if request.user.is_authenticated:
+        favorites = Favorite.objects.filter(user=request.user).values_list('product', flat=True)
+    else:
+        favorites = []
+    
     if category_slug:
         category = ProductCategory.objects.filter(slug=category_slug).first()
         products = products.filter(category=category) if category else Product.objects.none()
@@ -31,6 +35,7 @@ def products(request):
         'search_query': search_query,
         'favorites': favorites
     }
+    
     return render(request, 'products.html', context)
 
 
