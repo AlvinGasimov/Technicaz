@@ -128,7 +128,11 @@
                                         <div class="product-quantity-box">
                                             <div class="right">
                                                 <div class="cart-box">
-                                                    <button type="submit" class="addtocart">{% trans 'Səbətə at' %}</button>
+                                                    {% if user.is_authenticated %}
+                                                        <button type="submit" class="addtocart">{% trans 'Səbətə at' %}</button>
+                                                    {% else %}
+                                                        <a href="{% url 'account:login' %}" class="addtocart">{% trans 'Login olun' %}</a>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

@@ -9,33 +9,32 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-03 11:48+0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2024-12-19 07:55+0000\n"
+"Last-Translator: Admin Adminov <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: templates/about.html:5 templates/about.html:16 templates/about.html:23
 #: templates/about.html:58 templates/partials/_navbar.html:104
 msgid "Haqqımızda"
-msgstr ""
+msgstr "Haqqımızda rus"
 
 #: templates/about.html:21 templates/index.html:5
 msgid "Ana Səhifə"
-msgstr ""
+msgstr "Ana rus"
 
 #: templates/about.html:104 templates/index.html:225
 msgid "Suallar"
-msgstr ""
+msgstr "Sual rus"
 
 #: templates/about.html:106 templates/index.html:227
 msgid "Tez-tez verilen suallar"
-msgstr ""
+msgstr "sual 2 rus"
 
 #: templates/blog-single.html:5
 msgid "Blog Detalı"
@@ -44,12 +43,13 @@ msgstr ""
 #: templates/blog-single.html:21 templates/blog.html:21 templates/cart.html:21
 #: templates/cart.html:114 templates/changePassword.html:21
 #: templates/contact.html:21 templates/favorites.html:21
-#: templates/login.html:21 templates/myaccount.html:21 templates/orders.html:21
-#: templates/partials/_navbar.html:103 templates/product-details.html:25
-#: templates/products.html:21 templates/register.html:21
-#: templates/sendEmailCode.html:21 templates/sixdigitsPassword.html:21
+#: templates/login.html:21 templates/myaccount.html:21
+#: templates/orders.html:21 templates/partials/_navbar.html:103
+#: templates/product-details.html:25 templates/products.html:21
+#: templates/register.html:21 templates/sendEmailCode.html:21
+#: templates/sixdigitsPassword.html:21
 msgid "Ana səhifə"
-msgstr ""
+msgstr "Ana rus"
 
 #: templates/blog-single.html:68
 msgid "Son bloqlar"
@@ -69,43 +69,43 @@ msgstr ""
 
 #: templates/cart.html:5 templates/cart.html:16 templates/cart.html:23
 msgid "Səbət"
-msgstr ""
+msgstr "Karzina"
 
 #: templates/cart.html:39
 msgid "Sifariş(lərin)iz"
-msgstr ""
+msgstr "Zakaz"
 
 #: templates/cart.html:47 templates/orders.html:70
 msgid "Məhsul"
-msgstr ""
+msgstr "Praduct"
 
 #: templates/cart.html:48 templates/orders.html:72
 msgid "Qiymət"
-msgstr ""
+msgstr "Cena"
 
 #: templates/cart.html:49
 msgid "Çəki"
-msgstr ""
+msgstr "KG"
 
 #: templates/cart.html:50
 msgid "Ümumi Qiymət"
-msgstr ""
+msgstr "Obsiy summa"
 
 #: templates/cart.html:51
 msgid "Sil"
-msgstr ""
+msgstr "uddalit"
 
 #: templates/cart.html:91
 msgid "Sifariş cəmi"
-msgstr ""
+msgstr "obsiy zakaz"
 
 #: templates/cart.html:103
 msgid "Sifariş et"
-msgstr ""
+msgstr "zakaziviy"
 
 #: templates/cart.html:110
 msgid "Səbətiniz boşdur!"
-msgstr ""
+msgstr "pusta karzina"
 
 #: templates/cart.html:112 templates/orders.html:118
 msgid "Alış-verişə davam edin!"
@@ -136,8 +136,8 @@ msgstr ""
 msgid "Təsdiqlə"
 msgstr ""
 
-#: templates/contact.html:5 templates/contact.html:16 templates/contact.html:23
-#: templates/partials/_navbar.html:121
+#: templates/contact.html:5 templates/contact.html:16
+#: templates/contact.html:23 templates/partials/_navbar.html:121
 msgid "Əlaqə"
 msgstr ""
 

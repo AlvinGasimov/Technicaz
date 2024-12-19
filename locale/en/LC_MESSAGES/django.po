@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-03 11:48+0400\n"
-"PO-Revision-Date: 2024-12-03 07:50+0000\n"
+"PO-Revision-Date: 2024-12-19 07:17+0000\n"
 "Last-Translator: Admin Adminov <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -69,43 +69,43 @@ msgstr "Not added blogs yet"
 
 #: templates/cart.html:5 templates/cart.html:16 templates/cart.html:23
 msgid "Səbət"
-msgstr ""
+msgstr "Cart"
 
 #: templates/cart.html:39
 msgid "Sifariş(lərin)iz"
-msgstr ""
+msgstr "Orders"
 
 #: templates/cart.html:47 templates/orders.html:70
 msgid "Məhsul"
-msgstr ""
+msgstr "Product"
 
 #: templates/cart.html:48 templates/orders.html:72
 msgid "Qiymət"
-msgstr ""
+msgstr "Price"
 
 #: templates/cart.html:49
 msgid "Çəki"
-msgstr ""
+msgstr "Weight"
 
 #: templates/cart.html:50
 msgid "Ümumi Qiymət"
-msgstr ""
+msgstr "Total Price"
 
 #: templates/cart.html:51
 msgid "Sil"
-msgstr ""
+msgstr "Delete"
 
 #: templates/cart.html:91
 msgid "Sifariş cəmi"
-msgstr ""
+msgstr "Total Orders"
 
 #: templates/cart.html:103
 msgid "Sifariş et"
-msgstr ""
+msgstr "Order"
 
 #: templates/cart.html:110
 msgid "Səbətiniz boşdur!"
-msgstr ""
+msgstr "Empty Order"
 
 #: templates/cart.html:112 templates/orders.html:118
 msgid "Alış-verişə davam edin!"

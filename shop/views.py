@@ -45,8 +45,15 @@ def remove_from_favorites(request, product_id):
 
 @login_required
 def cart_list(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_price = sum(item.total_price for item in cart_items)
+    cart_items = CartItem.objects.filter(user=request.user, product__isnull=False)
+
+    total_price = 0
+    for item in cart_items:
+        if item.product.discount_price:
+            total_price += item.product.discount_price * item.quantity
+        else:
+            total_price += item.product.price * item.quantity
+
     return render(request, 'cart.html', {'cart_items': cart_items, 'total_price': total_price})
 
 @login_required

@@ -42,7 +42,12 @@ def products(request):
 def product_detail(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
     weights = Weight.objects.all().order_by('value')
-    is_favorite = Favorite.objects.filter(user=request.user, product=product).exists()
+    
+    if request.user.is_authenticated:
+        is_favorite = Favorite.objects.filter(user=request.user, product=product).exists()
+    else:
+        is_favorite = False
+    
 
     context = {
         'product': product,

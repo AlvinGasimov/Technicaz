@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-x$b3^p7hgp!fcn22)84@taflc^l+xick*8zo*vdg6v-+_hy^%9'
-SECRET_KEY = getenv("SECRET_KEY")
+# SECRET_KEY = getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'jazzmin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -48,6 +49,10 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'shop.apps.ShopConfig',
     'modeltranslation',
+    # 'admin_interface',
+    # 'colorfield',
+    # 'jet',
+    # 'grappelli',
     'django.contrib.admin',
     'rosetta',
 ]
@@ -173,3 +178,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CSRF_TRUSTED_ORIGINS = []
+
+LOGIN_URL = 'account:login'
