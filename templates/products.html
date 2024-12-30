@@ -67,7 +67,11 @@
                                         <div class="single-product-item wow fadeInUp animated animated"
                                             data-wow-delay="00ms" data-wow-duration="1500ms">
                                             <div class="img-holder">
-                                                <img src="{{ product.image.url }}" alt="Awesome Product Image">
+                                                {% if product.image %}
+                                                    <img src="{{ product.image.url }}" alt="Awesome Product Image">
+                                                {% else %}
+                                                    <img src="" alt="">
+                                                {% endif %}
                                                 <div class="overlay-style-one">
                                                     <div class="box">
                                                         <div class="content">
