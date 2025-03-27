@@ -1,0 +1,158 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Sifarişlər' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Hesabım' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Hesabım' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="account-pages-v2 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-12 col-12">
+                    <div class="account-sideMe d-lg-block">
+                        <ul class="account-links">
+                            <li>
+                                <a href="{% url 'account:account' %}">{% trans 'Hesabım' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'shop:orders_list' %}" class="active">{% trans 'Sifarişlərim' %}</a>
+                            </li>
+                            <li class="list-separator"></li>
+                            <li>
+                                <a href="{% url 'shop:favorites_list' %}" class="">{% trans 'Sevimlilərim' %}</a>
+                            </li>
+                            <li class="list-separator"></li>
+                            <li>
+                                <a href="{% url 'base:index' %}">{% trans 'Çıxış et' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        
+                <div class="col-lg-9">
+                    {% if orders %}
+                    <div class="container my-5">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-10">
+                                <div class="card shadow-sm" style="border-radius: 10px; border: 1px solid #ddd; overflow: hidden;">
+                                    <div class="card-header bg-primary text-white text-center" style="padding: 20px;">
+                                        <h4 style="margin: 0;">{% trans 'Sifarişlərim' %}</h4>
+                                    </div>
+                                    <div class="card-body" style="background-color: #f9f9f9; padding: 20px;">
+                                        <table class="table table-hover table-bordered text-center table-responsive-lg" style="border-collapse: collapse;">
+                                            <thead class="thead-dark" style="background-color: #343a40; color: white;">
+                                                <tr>
+                                                    <th class="product-thumbnail order-product-thumbnail" style="padding: 15px;">{% trans 'Şəkil' %}</th>
+                                                    <th class="product-name order-product-name" style="padding: 15px;">{% trans 'Məhsul' %}</th>
+                                                    <th class="product-quantity my-order-quantity" style="padding: 15px;">{% trans 'Miqdar' %}</th>
+                                                    <th class="product-subtotal order-product-subtotal" style="padding: 15px;">{% trans 'Qiymət' %}</th>
+                                                    <th class="order-date" style="padding: 15px;">{% trans 'Tarix' %}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for order in orders %}
+                                                    {% for item in order.order_items.all %}
+                                                        <tr class="product-box-container" style="border-bottom: 1px solid #ddd;">
+                                                            <td style="padding: 15px;">
+                                                                <a href="{% url 'product:products' %}">
+                                                                    <img class="img-fluid max-width-100 p-1 border border-color-1 myImg order-img"
+                                                                         src="{{ item.product.image.url }}" alt="Image Description" style="max-width: 50px; height: auto;">
+                                                                </a>
+                                                            </td>
+                                                            <td style="padding: 15px;">
+                                                                <a href="{% url 'product:product_detail' item.product.slug %}" class="text-gray-90 card-text order-text-name" style="color: #333; font-weight: bold;">
+                                                                    {{ item.product.name }}
+                                                                </a>
+                                                            </td>
+                                                            <td style="padding: 15px;">
+                                                                <span style="font-size: 16px; color: #555;">{{ item.quantity }} ədəd</span>
+                                                            </td>
+                                                            <td style="padding: 15px;">
+                                                                <span style="font-size: 16px; color: #555;">{{ item.total_price|floatformat:2 }} ₼</span>
+                                                            </td>
+                                                            <td style="padding: 15px;">
+                                                                <span style="font-size: 14px; color: #777;">{{ order.created_at|date:"d.m.Y" }}</span>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                {% empty %}
+                                                    <tr>
+                                                        <td colspan="5" style="padding: 20px; text-align: center; font-size: 16px; color: #888;">{% trans 'Hələ ki, sifarişiniz yoxdur.' %}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                       
+                    {% else %}
+                        <div class="error-content text-center">
+                            <h4>{% trans 'Sifarişiniz yoxdur!' %}</h4>
+                            <div class="title thm_clr1"></div>
+                            <p>{% trans 'Alış-verişə davam edin!' %}</p>
+                            <div class="btns-box">
+                                <a class="btn-one" href="{% url 'product:products' %}"><span class="txt">{% trans 'Məhsullarımıza baxın' %}</span></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        let passwordInputs = document.querySelectorAll('input[type="password"]')
+        let iconHolders = document.querySelectorAll('.icon-holder')
+        iconHolders.forEach(iconHolders => {
+
+            iconHolders.addEventListener('click', function () {
+                let passwordInput = this.previousElementSibling
+
+                let icon = this.querySelector('i')
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text'
+                    icon.classList.remove('fa-eye-slash')
+                    icon.classList.add('fa-eye')
+                }
+                else {
+                    passwordInput.type = 'password'
+                    icon.classList.add('fa-eye-slash')
+                    icon.classList.remove('fa-eye')
+                }
+
+            })
+        })
+
+    </script>
+
+{% endblock %}

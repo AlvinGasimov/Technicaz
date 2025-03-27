@@ -1,0 +1,175 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Technicaz | {% block title %} {% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ ceo.description|default:'' }}">
+    <meta name="keywords" content="{{ ceo.keywords|default:'' }}">
+    <meta name="author" content="{{ ceo.author|default:'' }}">
+    <meta property="og:title" content="{{ ceo.og_title|default:ceo.title }}">
+    <meta property="og:description" content="{{ ceo.og_description|default:ceo.description }}">
+    <meta property="og:image" content="{{ ceo.og_image.url|default:'' }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="profile">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ ceo.og_title|default:ceo.title }}">
+    <meta name="twitter:description" content="{{ ceo.og_description|default:ceo.description }}">
+    <meta name="twitter:image" content="{{ ceo.og_image.url|default:'' }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{{ ceo.favicon.url|default:'' }}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/imp.css' %}">
+    <link rel="stylesheet" href="{% static 'css/date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom-animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hiddenbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.bootstrap-touchspin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/polyglot-language-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <link href="{% static 'css/color/theme-color.css' %}" id="jssDefault" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timePicker.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" href="" sizes="16x16">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.css' %}" />
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+
+    <div class="boxed_wrapper ltr">
+
+        {% include "partials/_navbar.html" %}
+
+        {% block content %} {% endblock %}
+
+        {% include "partials/_footer.html" %}
+
+    </div>
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/appear.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'js/isotope.js' %}"></script>
+    <script src="{% static 'js/jquery.bxslider.min.js' %}"></script>
+    <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/jquery.countTo.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'js/jquery.enllax.min.js' %}"></script>
+    <script src="{% static 'js/jquery.fancybox.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.paroller.min.js' %}"></script>
+    <script src="{% static 'js/jquery.polyglot.language.switcher.js' %}"></script>
+    <script src="{% static 'js/jQuery.style.switcher.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/jquery.bootstrap-touchspin.js' %}"></script>
+    <script src="{% static 'js/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'js/knob.js' %}"></script>
+    <script src="{% static 'js/map-script.js' %}"></script>
+    <script src="{% static 'js/owl.js' %}"></script>
+    <script src="{% static 'js/pagenav.js' %}"></script>
+    <script src="{% static 'js/parallax.min.js' %}"></script>
+    <script src="{% static 'js/scrollbar.js' %}"></script>
+    <script src="{% static 'js/slick.js' %}"></script>
+    <script src="{% static 'js/timePicker.js' %}"></script>
+    <script src="{% static 'js/validation.js' %}"></script>
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'js/TweenMax.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script>
+
+        function addToFavorites(productId) {
+            $.ajax({
+                url: `/shop/favorites/add/${productId}/`,
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(), // CSRF token əlavə edin
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                    }
+                },
+            });
+        }
+
+        function removeFromFavorites(productId) {
+            $.ajax({
+                url: `/shop/favorites/remove/${productId}/`,
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(),
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                        location.reload();
+                    }
+                },
+            });
+        }
+
+        function addToCart(productId) {
+            $.ajax({
+                url: `/shop/cart/add/${productId}/`,
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(),
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                    }
+                },
+            });
+        }
+
+        function removeFromCart(productId) {
+            $.ajax({
+                url: `/shop/cart/remove/${productId}/`,
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken(),
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                        location.reload();
+                    }
+                },
+            });
+        }
+
+        function getCSRFToken() {
+            return document.querySelector('[name=csrfmiddlewaretoken]').value;
+        }
+
+    </script>
+
+    {% block js %} {% endblock %}
+
+</body>
+</html>

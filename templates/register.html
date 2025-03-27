@@ -1,0 +1,172 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Qeydiyyat' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Qeydiyyat' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Qeydiyyat' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login-register-area ">
+        <div class="container">
+            <div class="row text-right-rtl justify-content-center">
+
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form register ">
+                        <div class="shop-page-title">
+                            <div class="title">Qeydiyyatdan keçin</div>
+                        </div>
+                        <div class="row">
+                            <form method="post" action="{% url 'account:register' %}">
+                                {% csrf_token %}
+                                <div class="col-md-12">
+                                    <div class="input-field">
+                                        <input type="text" name="full_name" placeholder="Ad Soyadınız *" value="{{ form.full_name.value|default:'' }}">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </div>
+                                        {% if form.full_name.errors %}
+                                            <span class="text-danger">{{ form.full_name.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-field">
+                                        <input type="email" name="email" placeholder="Email *" value="{{ form.email.value|default:'' }}">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </div>
+                                        {% if form.email.errors %}
+                                            <span class="text-danger">{{ form.email.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-field">
+                                        <span class="countrycode">+994</span>
+                                        <input type="text" name="phone_number" placeholder="(_ _) _ _ _-_ _-_ _" style="padding-left: 3.6rem; font-size: 14px" maxlength="14" value="{{ form.phone_number.value|default:'' }}">
+                                        <div class="icon-holder">
+                                            <i class="icon-phone thm_clr1"></i>
+                                        </div>
+                                        {% if form.phone_number.errors %}
+                                            <span class="text-danger">{{ form.phone_number.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-field">
+                                        <input type="password" name="password" placeholder="Şifrə *">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                        </div>
+                                        {% if form.password.errors %}
+                                            <span class="text-danger">{{ form.password.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-field">
+                                        <input type="password" name="confirm_password" placeholder="Təkrar şifrə *">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                        </div>
+                                        {% if form.confirm_password.errors %}
+                                            <span class="text-danger">{{ form.confirm_password.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row right-button">
+                                        <div class="col-lg-5 col-md-5 col-sm-12">
+                                            <button class="btn-one" type="submit"><span class="txt">Qeydiyyatdan keç</span></button>
+                                        </div>
+                                        <div class="col-lg-7 col-md-7 col-sm-12">
+                                            <div class="right">
+                                                <h6><span>*</span>Hesabınız var?
+                                                    <a href="{% url 'account:login' %}">Daxil ol</a>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %} 
+
+{% block js %}
+
+    <script>
+
+        $(document).ready(function () {
+            $(".phone-mask").mask("(00) 000-00-00");
+
+            $(".phone-mask").on("keydown", function (e) {
+                if (
+                    e.keyCode === 8 ||
+                    e.keyCode === 46 ||
+                    (e.keyCode >= 37 && e.keyCode <= 40) ||
+                    e.keyCode === 9
+                ) {
+                    return;
+                }
+                if (e.key.length === 1 && e.key.match(/[^0-9]/)) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        let passwordInputs = document.querySelectorAll('input[type="password"]')
+        let iconHolders = document.querySelectorAll('.icon-holder')
+        
+        iconHolders.forEach(iconHolders => {
+
+            iconHolders.addEventListener('click', function () {
+                let passwordInput = this.previousElementSibling
+
+                let icon = this.querySelector('i')
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text'
+                    icon.classList.remove('fa-eye-slash')
+                    icon.classList.add('fa-eye')
+                }
+                else {
+                    passwordInput.type = 'password'
+                    icon.classList.add('fa-eye-slash')
+                    icon.classList.remove('fa-eye')
+                }
+
+            })
+        })
+
+    </script>
+
+{% endblock %}

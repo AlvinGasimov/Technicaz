@@ -1,0 +1,121 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Giriş' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Daxil ol' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Daxil ol' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login-register-area">
+        <div class="container">
+            <div class="row text-right-rtl justify-content-center">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form">
+                        <div class="shop-page-title">
+                            <div class="title">{% trans 'Daxil ol' %}</div>
+                        </div>
+                        <div class="row">
+                            <form method="post" action="{% url 'account:login' %}">
+                                {% csrf_token %}
+                                <div class="col-xl-12">
+                                    <div class="input-field">
+                                        <input type="email" name="email" placeholder="Email *">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </div>
+                                        {% if form.email.errors %}
+                                            <span class="text-danger">{{ form.email.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="input-field">
+                                        <input type="password" name="password" placeholder="Şifrə">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                        </div>
+                                        {% if form.password.errors %}
+                                            <span class="text-danger">{{ form.password.errors.0 }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 forget-a">
+                                    <a href="{% url 'account:send_email_code' %}">{% trans 'Şifrəmi Unutdum' %}</a>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button class="btn-one" type="submit"><span class="txt">{% trans 'Daxil ol' %}</span></button>
+                                            <div class="remember-text">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <span>{% trans 'Hesabınız yoxdur' %}?</span>
+                                                        <span><a href="{% url 'account:register' %}">{% trans 'Qeydiyyatdan keçin' %}</a></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        let passwordInputs = document.querySelectorAll('input[type="password"]')
+        let iconHolders = document.querySelectorAll('.icon-holder')
+        iconHolders.forEach(iconHolders => {
+
+            iconHolders.addEventListener('click', function () {
+                let passwordInput = this.previousElementSibling
+
+                let icon = this.querySelector('i')
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text'
+                    icon.classList.remove('fa-eye-slash')
+                    icon.classList.add('fa-eye')
+                }
+                else {
+                    passwordInput.type = 'password'
+                    icon.classList.add('fa-eye-slash')
+                    icon.classList.remove('fa-eye')
+                }
+
+            })
+        })
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,266 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Məhsul Detalları' %} {% endblock %}
+
+{% block css %} 
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{{ product.name }}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{{ product.name }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="single-shop-area">
+        <section class="product-details-section section-padding">
+            <div class="container">
+                <div class="product-details-wrapper">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-12">
+                            <div class="video_img_section_wrapper details-slider" data-id="5">
+                                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;" class="swiper mySwiper2">
+                                    <div class="swiper-wrapper">
+                                        {% if product.image %}
+                                            <div class="swiper-slide">
+                                                <a href="{{ product.image.url }}" data-fancybox="gallery">
+                                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                                                    <div class="fancybox-i">
+                                                        <i class="pe-7s-search"></i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+
+                                        {% for image in product.images.all %}
+                                            <div class="swiper-slide">
+                                                <a href="{{ image.image.url }}" data-fancybox="gallery">
+                                                    <img src="{{ image.image.url }}" alt="{{ product.name }}" />
+                                                    <div class="fancybox-i">
+                                                        <i class="pe-7s-search"></i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        {% empty %}
+                                            <p>{% trans 'Bu məhsul üçün heç bir şəkil yoxdur.' %}</p>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                                <div thumbsSlider="" class="swiper mySwiper">
+                                    <div class="swiper-wrapper">
+                                        {% if product.image %}
+                                            <div class="swiper-slide">
+                                                <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                                            </div>
+                                        {% endif %}
+
+                                        {% for image in product.images.all %}
+                                            <div class="swiper-slide">
+                                                <img src="{{ image.image.url }}" />
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="product-details-content">
+                                <h2 class="pb-3">{{ product.name }}</h2>
+                        
+                                <div class="mini-desc">
+                                    <p>{{ product.description }}</p>
+                                </div>
+                                
+                                <div class="price-list ratting">
+                                    <p>{% trans '1kg üçün olan qiymət:' %}</p>
+                                    {% if product.discount_price %}
+                                        <p class="current_price_static">{{ product.discount_price }} ₼</p>
+                                        <span class="discounted-price old_price">{{ product.price }} ₼</span>
+                                    {% else %}
+                                        <p class="current_price_static">{{ product.price }} ₼</p>
+                                    {% endif %}
+                                </div>
+
+                                <form method="POST" action="{% url 'shop:add_to_cart' product.slug %}" id="addToCartForm">
+                                    {% csrf_token %}
+                                    <div class="calculate-price">
+                                        <select name="weight" class="cekiSelect" id="weightSelect">
+                                            {% for weight in weights %}
+                                                <option value="{{ weight.value }}" data-price="{{ weight.price }}">
+                                                    {{ weight.value }} kg
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        <div class="price-list ratting">
+                                            <h3 class="current_price" id="finalPrice" data-discount-price="{{ product.discount_price|default_if_none:0 }}" data-base-price="{{ product.price }}">
+                                                {% if product.discount_price %}
+                                                    {{ product.discount_price|floatformat:2 }} ₼
+                                                {% else %}
+                                                    {{ product.price|floatformat:2 }} ₼
+                                                {% endif %}
+                                            </h3>
+                                        </div>
+                                    </div>                                                                
+                                    <div class="cart-wrp">
+                                        <div class="product-quantity-box">
+                                            <div class="right">
+                                                <div class="cart-box">
+                                                    {% if user.is_authenticated %}
+                                                        <button type="submit" class="addtocart">{% trans 'Səbətə at' %}</button>
+                                                    {% else %}
+                                                        <a href="{% url 'account:login' %}" class="addtocart">{% trans 'Login olun' %}</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                <h6 class="details-info"><span>{% trans 'Kod:' %}</span> <a href="{% url 'product:product_detail' product.slug %}">{{ product.code }}</a></h6>
+                                <h6 class="details-info"><span>{% trans 'Kateqoriya:' %}</span> <a href="{% url 'product:product_detail' product.slug %}">{{ product.category.name }}</a></h6>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="product-tab-box tabs-box">
+                                <ul class="tab-btns tab-buttons clearfix">
+                                    <li data-tab="#desc" class="tab-btn active-btn"><span>{% trans 'Təsvir' %}</span></li>
+                                    <li data-tab="#review" class="tab-btn"><span>{% trans 'Özəlliklər' %}</span></li>
+                                </ul>
+                                <div class="tabs-content">
+                                    <div class="tab active-tab" id="desc" style="display: block;">
+                                        <div class="product-details-content">
+                                            <div class="desc-content-box">
+                                                <p>{{ product.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab" id="review" style="display: none;">
+                                        <div class="review-box-holder">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                    <div class="form order-info">
+
+                                                        <div class="order-info-table-box">
+                                                            <div class="table-outer">
+                                                                <table class="order-table">
+                                                                    <thead class="order-header clearfix">
+                                                                        <tr>
+                                                                            <th class="prod-column">{% trans 'Özəlliyin adı' %}
+                                                                            </th>
+                                                                            <th>{% trans 'Özəlliyin özü' %}</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {% for spec in product.features.all %}
+                                                                            <tr>
+                                                                                <td class="prod-column">
+                                                                                    <div class="column-box">
+                                                                                        <div class="title">
+                                                                                            <h3 class="prod-title">
+                                                                                                {{ spec.feature_name }}
+                                                                                            </h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="sub-total">{{ spec.feature_value }}</td>
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+{% endblock %}
+
+
+{% block js %}
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 10,
+            slidesPerView: 5,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+        var swiper2 = new Swiper(".mySwiper2", {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            thumbs: {
+                swiper: swiper,
+            },
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const weightSelect = document.getElementById("weightSelect");
+            const finalPriceElement = document.getElementById("finalPrice");
+        
+            // Retrieve base and discount prices from data attributes
+            const basePrice = parseFloat(finalPriceElement.getAttribute("data-base-price"));
+            const discountPrice = parseFloat(finalPriceElement.getAttribute("data-discount-price"));
+            const isDiscountAvailable = discountPrice > 0;
+        
+            // Function to calculate and update the price
+            function updatePrice() {
+                const selectedOption = weightSelect.options[weightSelect.selectedIndex];
+                const weightValue = parseFloat(selectedOption.value);
+                const unitPrice = isDiscountAvailable ? discountPrice : basePrice;
+                const totalPrice = weightValue * unitPrice;
+        
+                // Update the displayed price
+                finalPriceElement.innerText = `${totalPrice.toFixed(2)} ₼`;
+            }
+        
+            // Initial price calculation
+            updatePrice();
+        
+            // Update the price when the weight selection changes
+            weightSelect.addEventListener("change", updatePrice);
+        });            
+    </script>
+
+{% endblock %}

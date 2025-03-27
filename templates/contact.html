@@ -1,0 +1,149 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Əlaqə' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Əlaqə' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Əlaqə' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-style1-area">
+        <div class="layer-outer" style="background-image: url({% static 'images/pattern/thm-pattern-3.png' %})"></div>
+        <div class="container">
+            <div class="row text-right-rtl">
+                <div class="col-xl-4 col-lg-4">
+                    <div class="single-info-box">
+                        <div class="inner">
+                            <div class="icon-holder">
+                                <span class="flaticon-maps-and-flags"></span>
+                            </div>
+                            <div class="title-holder">
+                                <h3>{% trans 'Ofis Məkanı' %}</h3>
+                                <p><a href="#">{{ navigation_item.address }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="single-info-box">
+                        <div class="inner">
+                            <div class="icon-holder">
+                                <span class="flaticon-phone-call-1"></span>
+                            </div>
+                            <div class="title-holder">
+                                <h3>{% trans 'Telefon Nömrəsi' %}</h3>
+                                <p><a href="tel:{{navigation_item.phone_number }}">{{navigation_item.phone_number }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4">
+                    <div class="single-info-box">
+                        <div class="inner">
+                            <div class="icon-holder">
+                                <span class="flaticon-email"></span>
+                            </div>
+                            <div class="title-holder">
+                                <h3>{% trans 'Email Adresi' %}</h3>
+                                <p><a href="mailto:{{ navigation_item.email }}">{{ navigation_item.email }}</a><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-map-area">
+        <div class="contact-map-outer">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.998839226522!2d49.8641605!3d40.4088765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d55f483215d%3A0x6579b75be1ed3d12!2sAhmad%20Rajabli%2C%20Baku!5e0!3m2!1sen!2saz!4v1731501010885!5m2!1sen!2saz"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <section class="contact-form-area">
+        <div class="shape1 rotate-me">
+            <img src="{% static 'images/shape/shape-4.png' %}" alt="" />
+        </div>
+        <div class="shape2">
+            <img src="{% static 'images/shape/shape-3.png' %}" alt="" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="contact-form-outer-box clearfix">
+                        <div class="contact-inner-box clearfix">
+                            <div class="contact-form">
+                                <div class="title text-center">
+                                    <h2>{% trans 'Bizimlə əlaqə' %}</h2>
+                                </div>
+                                
+                                <form id="contact-form" name="contact_form" class="default-form2" action="{% url 'contact:contact' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-xl-6">
+                                            <div class="input-box">
+                                                {{ contact_form.name }}
+                                            </div>
+                                            <div class="input-box">
+                                                {{ contact_form.email }}
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="input-box">
+                                                {{ contact_form.phone }}
+                                            </div>
+                                            <div class="input-box">
+                                                {{ contact_form.subject }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="input-box">
+                                                {{ contact_form.message }}
+                                            </div>
+                                            <div class="button-box text-center">
+                                                <button type="submit" class="btn-one style2">
+                                                    <span class="txt">{% trans 'Mesajınızı göndərin' %}</span>
+                                                </button>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

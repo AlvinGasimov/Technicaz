@@ -1,0 +1,26 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Error' %} {% endblock %}
+
+{% block content %}
+
+    <section class="error-page-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="error-content text-center">
+                        <h4>{% trans 'Səhifə tapılmadı' %}</h4>
+                        <div class="title thm_clr1">404</div>
+                        <p>{% trans 'Opps... Üzr istəyirik, axtarışınıza uyğun səhifə tapılmadı!' %}</p>
+                        <div class="btns-box">
+                            <a class="btn-one" href="{% url 'base:index' %}"><span class="txt">Ana səhifə</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

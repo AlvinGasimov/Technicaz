@@ -1,0 +1,203 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Mənim Hesabım' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Hesabım' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Hesabım' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="account-pages-v2 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-12 col-12">
+                    <div class="account-sideMe d-lg-block">
+                        <ul class="account-links">
+                            <li>
+                                <a href="{% url 'account:account' %}" class="active">{% trans 'Hesabım' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'shop:orders_list' %}" class="">{% trans 'Sifarişlərim' %}</a>
+                            </li>
+                            <li class="list-separator"></li>
+                            <li>
+                                <a href="{% url 'shop:favorites_list' %}" class="">{% trans 'Sevimlilərim' %}</a>
+                            </li>
+                            <li class="list-separator"></li>
+                            <li>
+                                <a href="{% url 'account:logout' %}">{% trans 'Çıxış et' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="account-pages-content">
+
+                        <form name="account" method="post" class="validate validate-one"
+                            onsubmit="return validateForm()">
+                            <div class="my-account-form">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <input type="text" id="account_firstName" name="account[firstName]"
+                                                placeholder="Ad *" class="form-control-me" value="{{ full_name }}" />
+                                            <div id="firstNameError" class="error-message"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg col-12">
+                                        <div class="form-group">
+                                            <input type="email" id="account_lastName" name="" placeholder="Email *"
+                                                class="form-control-me" value="{{ email }}" />
+                                            <div id="lastNameError" class="error-message"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="js-form-message js-focus-state">
+
+                                        <div class="input-group input-group">
+                                            <span class="countrycode">+994</span>
+                                            <input class="from-control phone-mask" type="text"
+                                                placeholder="(_ _) _ _ _-_ _-_ _" value="{{ phone_number }}"
+                                                style="padding-left: 3.2rem; font-size: 14px" maxlength="14" />
+
+                                        </div>
+                                        <small id="phoneError" class="text-danger"></small>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="d-flex justify-content-lg-end my-button ">
+                                <button class="button my-button-change" type="submit">{% trans 'Yadda saxla' %}</button>
+                            </div>
+                        </form>
+
+                        <form name="password" method="post" class="validate"
+                            onsubmit=" return validatePasswordForm()">
+                            <div class="my-account-form">
+                                <h5 class="mb-4">{% trans 'Şifrəni dəyişdir' %}</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group" onfocusin="toggleIndicator(this, 1)"
+                                            onfocusout="toggleIndicator(this, 2)" data-password-input
+                                            data-show="false">
+                                            <input type="password" id="account_plainPassword_first"
+                                                name="account[plainPassword][first]" placeholder="Yeni şifəniz"
+                                                class="form-control-me" />
+                                            <div id="newPasswordError" class="error-message"></div>
+                                        </div>
+                                        <div class="form-group" onfocusin="toggleIndicator(this, 1)"
+                                            onfocusout="toggleIndicator(this, 2)" data-password-input
+                                            data-show="false">
+                                            <input type="password" id="account_plainPassword_second"
+                                                name="account[plainPassword][second]" placeholder="Şifrə (təkrar)"
+                                                class="form-control-me" />
+                                            <div id="confirmPasswordError" class="error-message"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-lg-end ">
+                                <button class="button my-button-change" type="submit">{% trans 'Yadda saxla' %}</button>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="account_captchaCode" class="required">{% trans 'Captcha code' %}</label>
+                                <input type="hidden" name="captchaCode" id="captchaCode">
+                                <script>
+                                    grecaptcha.ready(function () {
+                                        grecaptcha.execute('6LfgiW4aAAAAAL5YSOkiQmrijwSClxtiK3OET_q0', {
+                                            action: 'account'
+                                        }).then(function (token) {
+                                            var recaptchaResponse = document.getElementById('captchaCode');
+                                            recaptchaResponse.value = token;
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        // phone mask start
+        $(document).ready(function () {
+            $(".phone-mask").mask("(00) 000-00-00");
+
+            $(".phone-mask").on("keydown", function (e) {
+                if (
+                    e.keyCode === 8 ||
+                    e.keyCode === 46 ||
+                    (e.keyCode >= 37 && e.keyCode <= 40) ||
+                    e.keyCode === 9
+                ) {
+                    return;
+                }
+                if (e.key.length === 1 && e.key.match(/[^0-9]/)) {
+                    e.preventDefault();
+                }
+            });
+        });
+        // phone mask end
+
+
+
+        let passwordInputs = document.querySelectorAll('input[type="password"]')
+        let iconHolders = document.querySelectorAll('.icon-holder')
+        iconHolders.forEach(iconHolders => {
+
+            iconHolders.addEventListener('click', function () {
+                let passwordInput = this.previousElementSibling
+
+                let icon = this.querySelector('i')
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text'
+                    icon.classList.remove('fa-eye-slash')
+                    icon.classList.add('fa-eye')
+                }
+                else {
+                    passwordInput.type = 'password'
+                    icon.classList.add('fa-eye-slash')
+                    icon.classList.remove('fa-eye')
+                }
+
+            })
+        })
+
+    </script>
+
+{% endblock %}

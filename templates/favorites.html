@@ -1,0 +1,178 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Sevimlilərim' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Sevimlilərim' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Sevimlilərim' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="account-pages-v2">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Section -->
+                <div class="col-lg-3 col-sm-12 col-12">
+                    <div class="account-sideMe d-lg-block">
+                        <ul class="account-links">
+                            <li>
+                                <a href="{% url 'account:account' %}">{% trans 'Hesabım' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'shop:orders_list' %}">{% trans 'Sifarişlərim' %}</a>
+                            </li>
+                            <li class="list-separator"></li>
+                            <li>
+                                <a href="{% url 'shop:favorites_list' %}" class="active">{% trans 'Sevimlilərim' %}</a>
+                            </li>
+                            <li class="list-separator"></li>
+                            <li>
+                                <a href="{% url 'base:index' %}">{% trans 'Çıxış et' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- Main Content Section -->
+                <div class="col-lg-9">
+                    {% if favorites %}
+                        <div class="favorites-list">
+                            <h4>{% trans 'Sevimlilərim' %}</h4>
+                            <div class="row">
+                            {% for favorite in favorites %}
+                                <div class="col-md-4 col-sm-6 mb-4" style="padding: 10px;">
+                                    <div class="product-card" style="position: relative; background-color: #fff; border-radius: 10px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                        <!-- Şəkil üçün standart ölçü və min-height -->
+                                        <img src="{{ favorite.product.image.url }}" alt="{{ favorite.product.name }}" 
+                                                style="width: 100%; height: auto; min-height: 250px; max-height: 250px; object-fit: cover; object-position: center;">
+                                        <div class="product-info" style="padding: 20px; text-align: center;">
+                                            <h5 class="product-title" style="font-size: 1.1rem; font-weight: bold; margin-bottom: 10px;">{{ favorite.product.name }}</h5>
+                                            <div class="price-info" style="font-size: 1.2rem; margin-bottom: 20px;">
+                                                {% if favorite.product.discount_price %}
+                                                    <del class="old-price" style="color: #888; text-decoration: line-through; margin-right: 5px;">{{ favorite.product.price }} ₼</del>
+                                                    <span class="new-price" style="color: #e74c3c; font-weight: bold;">{{ favorite.product.discount_price }} ₼</span>
+                                                {% else %}
+                                                    <span class="current-price" style="color: #2ecc71; font-weight: bold;">{{ favorite.product.price }} ₼</span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="product-actions" style="margin-top: 20px;">
+                                                <a href="{% url 'product:product_detail' favorite.product.slug %}" class="btn btn-primary" style="display: block; font-size: 0.9rem; font-weight: bold; padding: 10px; background-color: #3498db; border: none; color: #fff; text-align: center; text-decoration: none; border-radius: 5px;">{% trans 'Səbətə at' %}</a>
+                                                <a href="{% url 'shop:remove_from_favorites' favorite.product.id %}" class="btn btn-outline-danger" style="display: block; font-size: 0.9rem; font-weight: bold; padding: 10px; border-color: #e74c3c; color: #e74c3c; text-align: center; text-decoration: none; margin-top: 10px; border-radius: 5px;">{% trans 'Sevimlilərdən sil' %}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+
+                            </div>
+                        </div>
+                    {% else %}
+                        <!-- Sevimli məhsullar yoxdursa -->
+                        <div class="error-content text-center">
+                            <h4>{% trans 'Sizin sevimli məhsulunuz yoxdur!' %}</h4>
+                            <div class="title thm_clr1"></div>
+                            <p>{% trans 'Alış-verişə davam edin və məhsul əlavə edin!' %}</p>
+                            <div class="btns-box">
+                                <a class="btn-one" href="{% url 'product:products' %}"><span class="txt">{% trans 'Məhsullarımız' %}</span></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiperThumbs = new Swiper(".mySwiper", {
+                spaceBetween: 10,
+                slidesPerView: 5,
+                freeMode: true,
+                watchSlidesProgress: true,
+                navigation: {
+                    nextEl: ".swiper-button-next-thumbs",
+                    prevEl: ".swiper-button-prev-thumbs",
+                },
+                breakpoints: {
+                    576: {
+                        slidesPerView: 5, // Small tablets
+                    },
+                    768: {
+                        slidesPerView: 6, // Small tablets
+                    },
+                    992: {
+                        slidesPerView: 6, // Large tablets
+                    },
+                    1200: {
+                        slidesPerView: 5, // Desktop
+                    },
+                },
+                on: {
+                    init: function () {
+                        toggleNavigationButtons(this);
+                    },
+                    resize: function () {
+                        toggleNavigationButtons(this);
+                    },
+                }
+            });
+
+
+            function toggleNavigationButtons(swiper) {
+                // Ensure swiper has fully initialized before querying slides
+                setTimeout(() => {
+                    const totalSlides = swiper.slides.length;
+                    const visibleSlides = swiper.params.slidesPerView;
+
+                    const nextButton = document.querySelector(".swiper-button-next");
+                    const prevButton = document.querySelector(".swiper-button-prev");
+
+                    if (nextButton && prevButton) {
+
+                        if (totalSlides <= visibleSlides) {
+                            nextButton.classList.add('dnone');
+                            prevButton.classList.add('dnone');
+                            nextButton.style.display = 'none';
+                            prevButton.style.display = 'none';
+                        } else {
+                            nextButton.style.display = 'block';
+                            prevButton.style.display = 'block';
+                        }
+                    } else {
+                        console.error('Navigation buttons not found');
+                    }
+                }, 100); // Added a bit more delay to ensure proper rendering
+            }
+        });
+
+
+    </script>
+
+{% endblock %}

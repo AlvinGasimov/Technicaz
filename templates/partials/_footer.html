@@ -1,0 +1,181 @@
+{% load static %}
+{% load i18n %}
+        
+    <footer class="footer-area">
+        <div class="footer">
+            <div class="shape1 rotate-me wow zoomInDown" data-wow-duration="4000ms"><img
+                    src="{% static 'images/shape/foooter-shape-1.png' %}" alt="" /></div>
+
+            <div class="shape3"> <i class="fa fa-fish"></i></div>
+            <div class="footer-bg-shape" style="background-image: url({% static 'images/shape/footer-bg-shape.png' %})">
+            </div>
+            <div class="container">
+                <div class="row text-right-rtl">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 wow animated fadeInUp" data-wow-delay="0.1s">
+                        <div class="single-footer-widget marbtm">
+                            <div class="our-company-info">
+                                <div class="footer-logo">
+                                    <a href="{% url 'base:index' %}"><img src="{{ navigation_item.footer_img.url }}"
+                                            alt="Awesome Footer Logo" title="Logo"></a>
+                                </div>
+                                <div class="text-box">
+                                    <p>{{ navigation_item.title }}</p>
+                                    <p>{{ navigation_item.description }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 wow animated fadeInUp" data-wow-delay="0.3s">
+                        <div class="single-footer-widget useful-links">
+                            <div class="title">
+                                <h3>{% trans 'Faydalı keçidlər' %}</h3>
+                            </div>
+                            <ul class="footer-widget-links1">
+                                <li><a href="{% url 'base:about' %}">{% trans 'Şirkət haqqında' %}</a></li>
+                                <li><a href="{% url 'base:about' %}">{% trans 'Necə işləyir' %}</a></li>
+                                <li><a href="{% url 'blog:blogs' %}">{% trans 'Blogumuz' %}</a></li>
+                                <li><a href="{% url 'product:products' %}">{% trans 'Məhsullar' %}</a></li>
+                                <li><a href="{% url 'contact:contact' %}">{% trans 'Bizimlə əlaqə' %}</a></li>
+                            </ul>
+                        </div>
+                    </div>                    
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 wow animated fadeInUp" data-wow-delay="0.3s">
+                        <div class="single-footer-widget">
+                            <div class="title">
+                                <h3>{% trans 'Məhsullar' %}</h3>
+                            </div>
+                            <ul class="footer-widget-links1">
+                                {% for category in last_6_categories %}
+                                    <li><a href="{% url 'product:products' %}?category={{ category.slug }}">{{ category.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 wow animated fadeInUp" data-wow-delay="0.7s">
+                        <div class="single-footer-widget pdtop">
+                            <div class="title">
+                                <h3>{% trans 'İnformation' %}</h3>
+                            </div>
+                            <div class="footer-contact-info">
+                                <ul>
+                                    <li>
+                                        <div class="icon">
+                                            <span class="icon-maps-and-flags marker thm_clr1"></span>
+                                        </div>
+                                        <div class="text">
+                                            <p>{{ navigation_item.address }}</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <span class="icon-phone thm_clr1"></span>
+                                        </div>
+                                        <div class="text">
+                                            <p><a href="tel:{{ navigation_item.phone_number }}">{{ navigation_item.phone_number }}</a></p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <span class="icon-opened thm_clr1"></span>
+                                        </div>
+                                        <div class="text">
+                                            <a href="mailto:{{ navigation_item.email }}">{{ navigation_item.email }}</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-subscribe-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="subscribe-content-box wow slideInDown" data-wow-delay="100ms" data-wow-duration="1500ms">
+                            <div class="subscribe-title">
+                                <h3>{% trans 'Abone olun' %}</h3>
+                            </div>
+                            <div class="subscribe-box">
+                                <form class="subscribe-form" action="{% url 'base:index' %}" method="post">
+                                    {% comment %} <input type="email" name="email" placeholder="Email daxil edin"> {% endcomment %}
+                                    {% csrf_token %}
+                                    {{ form.email }}
+                                    <button class="btn-one" type="submit"><span class="txt">{% trans 'Təsdiqlə' %}</span></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="outer-box">
+                    <div class="copyright-text">
+                        <p> &copy; <a href="https://khanbutagroup.az/" class="thm_clr1" target="_blank">Khan Buta xGroup</a> 2024 {% trans 'Bütün Hüquqlar Qorunur' %}</p>
+                    </div>
+                    <div class="footer-social-link">
+                        <ul>
+                            {% if navigation_item.facebook %}
+                                <li>
+                                    <a href="{{ navigation_item.facebook }}" target="_blank"> <i class="fab fa-facebook" aria-hidden="true"></i> </a>
+                                </li>
+                            {% endif %}
+        
+                            {% if navigation_item.instagram %}
+                                <li>
+                                    <a href="{{ navigation_item.instagram }}" target="_blank"> <i class="fab fa-instagram" aria-hidden="true"></i> </a>
+                                </li>
+                            {% endif %}
+        
+                            {% if navigation_item.whatsapp %}
+                                <li>
+                                    <a href="{{ navigation_item.whatsapp }}" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> </a>
+                                </li>
+                            {% endif %}
+        
+                            {% if navigation_item.linkedin %}
+                                <li>
+                                    <a href="{{ navigation_item.linkedin }}" target="_blank"> <i class="fab fa-linkedin" aria-hidden="true"></i> </a>
+                                </li>
+                            {% endif %}
+        
+                            {% if navigation_item.telegram %}
+                                <li>
+                                    <a href="{{ navigation_item.telegram }}" target="_blank"> <i class="fab fa-telegram" aria-hidden="true"></i> </a>
+                                </li>
+                            {% endif %}
+        
+                            {% if navigation_item.tiktok %}
+                                <li>
+                                    <a href="{{ navigation_item.tiktok }}" target="_blank"> <i class="fab fa-tiktok" aria-hidden="true"></i> </a>
+                                </li>
+                            {% endif %}
+        
+                            {% if navigation_item.youtube %}
+                                <li>
+                                    <a href="{{ navigation_item.youtube }}" target="_blank"> <i class="fab fa-youtube" aria-hidden="true"></i> </a>
+                                </li>
+                            {% endif %}
+                            
+                        </ul>
+                    </div>
+                    <div class="footer-menu-style1">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </footer>
+
+
+<button class="scroll-top scroll-to-target thm_bgclr1" data-target="html">
+    <span class="fa fa-angle-up"></span>
+</button>

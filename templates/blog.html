@@ -1,0 +1,162 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Blog' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Bloqlar' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Bloqlar' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-grid-style1-area">
+        <div class="container">
+            <div class="row text-right-rtl">
+                {% if page_obj %}
+                    {% for blog in page_obj %}
+                        <div class="col-xl-4 col-lg-4 col-6">
+                            <div class="single-blog-style1 wow fadeInUp" data-wow-duration="1500ms">
+                                <div class="img-holder">
+                                    <div class="inner">
+                                        <img src="{{ blog.image.url }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="text-holder">
+                                    <h3 class="blog-title">
+                                        <a href="{% url 'blog:blog-details' blog.slug %}">{{ blog.title }} </a>
+                                    </h3>
+                                    <ul class="meta-info">
+
+                                        <li>{{ blog.created_at|date:"F j, Y" }}</li>
+                                    </ul>
+                                    <div class="text">
+                                        <p>{{ blog.content|slice:":50" }}</p>
+                                    </div>
+                                    <div class="button-box">
+                                        <a class="btn-one" href="{% url 'blog:blog-details' blog.slug %}"><span class="txt">Daha çox</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning" role="alert"> {% trans 'Hələ blog əlavə edilməyib' %} </div>
+                {% endif %}
+            </div>
+            <div class="row">
+
+                {% if page_obj %}
+                    <div class="pagination-area">
+                        <div thumbsSlider="" class="swiper mySwiper th-pagination">
+                            <div class="swiper-wrapper">
+                                {% for page_num in page_obj.paginator.page_range %}
+                                    <div class="swiper-slide">
+                                        <li>
+                                            {% if page_num == page_obj.number %}
+                                                <a class="active" href="?page={{ page_num }}">{{ page_num }}</a>
+                                            {% else %}
+                                                <a href="?page={{ page_num }}">{{ page_num }}</a>
+                                            {% endif %}
+                                        </li>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev swiper-button-prev-thumbs"></div>
+                        <div class="swiper-button-next swiper-button-next-thumbs"></div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiperThumbs = new Swiper(".mySwiper", {
+                spaceBetween: 10,
+                slidesPerView: 5,
+                freeMode: true,
+                watchSlidesProgress: true,
+                navigation: {
+                    nextEl: ".swiper-button-next-thumbs",
+                    prevEl: ".swiper-button-prev-thumbs",
+                },
+                breakpoints: {
+                    576: {
+                        slidesPerView: 5
+                    },
+                    768: {
+                        slidesPerView: 6
+                    },
+                    992: {
+                        slidesPerView: 6
+                    },
+                    1200: {
+                        slidesPerView: 5
+                    },
+                },
+                on: {
+                    init: function () {
+                        toggleNavigationButtons(this);
+                    },
+                    resize: function () {
+                        toggleNavigationButtons(this);
+                    },
+                }
+            });
+
+
+            function toggleNavigationButtons(swiper) {
+                setTimeout(() => {
+                    const totalSlides = swiper.slides.length;
+                    const visibleSlides = swiper.params.slidesPerView;
+
+                    const nextButton = document.querySelector(".swiper-button-next");
+                    const prevButton = document.querySelector(".swiper-button-prev");
+
+                    if (nextButton && prevButton) {
+
+                        if (totalSlides <= visibleSlides) {
+                            nextButton.classList.add('dnone');
+                            prevButton.classList.add('dnone');
+                            nextButton.style.display = 'none';
+                            prevButton.style.display = 'none';
+                        } else {
+                            nextButton.style.display = 'block';
+                            prevButton.style.display = 'block';
+                        }
+                    } else {
+                        console.error('Navigation buttons not found');
+                    }
+                }, 100);
+            }
+        });
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Mesaja Kod Göndər' %}% {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Şifrənin bərpası' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Şifrənin bərpası' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login-register-area">
+        <div class="container">
+            <div class="row text-right-rtl justify-content-center">
+                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                    <div class="form">
+                        <div class="shop-page-title">
+                            <div class="title">{% trans 'Kod göndər' %}</div>
+                        </div>
+                        <div class="row">
+                            <form action="#">
+                                <div class="col-xl-12">
+                                    <div class="input-field">
+                                        <input type="email" name="email" placeholder="Email *">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {% comment %} <button class="btn-one" type="submit">
+                                                <span class="txt"> Kod göndər</span>
+                                            </button> {% endcomment %}
+
+                                            <a href="{% url 'account:six_digit' %}" class="btn-one">
+                                                <span class="txt"> {% trans 'Kod göndər' %}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        let passwordInputs = document.querySelectorAll('input[type="password"]')
+        let iconHolders = document.querySelectorAll('.icon-holder')
+        iconHolders.forEach(iconHolders => {
+
+            iconHolders.addEventListener('click', function () {
+                let passwordInput = this.previousElementSibling
+
+                let icon = this.querySelector('i')
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text'
+                    icon.classList.remove('fa-eye-slash')
+                    icon.classList.add('fa-eye')
+                }
+                else {
+                    passwordInput.type = 'password'
+                    icon.classList.add('fa-eye-slash')
+                    icon.classList.remove('fa-eye')
+                }
+
+            })
+        })
+
+    </script>
+
+{% endblock %}

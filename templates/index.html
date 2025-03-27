@@ -1,0 +1,399 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Ana Səhifə' %} {% endblock %}
+
+{% block content %}
+
+    <section class="main-slider style1">
+        <div class="slider-box">
+            <div class="banner-carousel owl-theme owl-carousel">
+                {% for home in homes %}
+                    <div class="slide">
+                        <div class="image-layer desktop-layer" style="background-image:url({{ home.main_img.url }})">
+                        </div>
+                        <div class="image-layer mobile-layer" style="background-image:url({{ home.responsive_img.url }})">
+                        </div>
+                        <div class="auto-container">
+                            <div class="content">
+                                <div class="big-title">
+                                    <h2>{{ home.title }}</h2>
+                                </div>
+                                <h3>{{ home.description|slice:":100" }}</h3>
+                                <div class="btns-box">
+                                    <a class="btn-one" href="{% url 'base:about' %}"><span class="txt">{% trans 'Daha çox' %}</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="features-style1-area">
+        <div class="container">
+            <div class="sec-title text-center">
+                <div class="sub-title">
+                    <span class="left"></span>
+                    <h4>{% trans 'Niyə biz?' %}</h4><span class="right"></span>
+                </div>
+                <h2>{% trans 'Özəlliklərimiz' %}</h2>
+            </div>
+            <div class="row">
+                {% for feature in features %}
+                    <div class="col-xl-3 col-lg-3 col-6">
+                        <div class="single-features-style1">
+                            <div class="icon-holder">
+                                <div class="dotted-box"></div>
+                                <div class="inner">
+                                    <span class="{{ feature.icon }} thm_clr1"></span>
+                                </div>
+                            </div>
+                            <div class="title-holder">
+                                <h3>{{ feature.title }}</h3>
+                                <p>{{ feature.description|slice:":40" }}</p>    
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="about-style1-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="about-style1-image-box clearfix">
+                        <div class="shape1"><img src="{% static 'images/shape/shape-5.png' %}" alt=""></div>
+                        <div class="shape2 float-bob-y"><img src="{% static 'images/shape/shape-6.png' %}" alt=""></div>
+                        <div class="shape3"><img class="paroller-2" src="{% static 'images/shape/shape-7.png' %}" alt="">
+                        </div>
+                        <div class="shape4 float-bob-y"><img src="{% static 'images/shape/shape-6.png' %}" alt=""></div>
+                        <div class="shape5 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="3500ms">
+                            <img class="paroller" src="{% static 'images/shape/shape-8.png' %}" alt="">
+                        </div>
+                        <div class="main-image">
+                            <div class="inner">
+                                <img src="{{ about.image.url }}" alt="">
+                            </div>
+                        </div>
+                        <div class="about-image-2 wow zoomIn" data-wow-delay="100ms" data-wow-duration="3500ms">
+                            <img src="{{ about.other_img.url }}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="about-style1-content-box text-right-rtl">
+                        <div class="sec-title">
+                            <div class="sub-title">
+                                <h4>{{ about.title }}</h4><span class="right"></span>
+                            </div>
+                            <h2>{{ about.title }}</h2>
+                        </div>
+                        <div class="inner-content">
+                            <div class="text">
+                                <p> {{ about.description|safe }}</p>
+                            </div>
+                            <div class="button-box">
+                                <a class="btn-one" href="{% url 'base:about' %}"><span class="txt">Daha çox</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-style1-area">
+        <div class="layer-outer" style="background-image: url({% static 'images/shape/shape-bg-1.png' %})"></div>
+        <div class="container">
+            <div class="sec-title text-center">
+                <div class="sub-title">
+                    <span class="left"></span>
+                    <h4 class="thm_clr1">{% trans 'Məhsullarımız' %}</h4><span class="right"></span>
+                </div>
+                <h2>{% trans 'Məhsullarımızla tanış olun' %}</h2>
+            </div>
+            <div class="row text-right-rtl">
+                <div class="col-xl-12">
+                    <div class="product-content-box">
+                        <div class="shape1 zoominout"><img src="{% static 'images/shape/shape-6.png' %}" alt="" /></div>
+                        <div class="shape2 float-bob-y"><img src="{% static 'images/shape/shape-9.png' %}" alt="" /></div>
+                        <div class="shape3 wow slideInRight" data-wow-duration="4000ms">
+                            <img class="paroller" src="{% static 'images/shape/shape-10.png' %}" alt="" />
+                        </div>
+                        <div class="row">
+                            {% for product in first_8_products %}
+                                <div class="col-xl-3 col-lg-3 col-md-6 col-6">
+                                    <div class="single-product-item wow fadeInUp animated animated"
+                                        data-wow-delay="00ms" data-wow-duration="1500ms">
+                                        <div class="img-holder">
+                                            <img src="{{ product.image.url }}" alt="Awesome Product Image">
+                                            <div class="overlay-style-one">
+                                                <div class="box">
+                                                    <div class="content">
+                                                        <div class="zoom-button">
+                                                            <a class="lightbox-image" data-fancybox="gallery"
+                                                                href="{{ product.image.url }}">
+                                                                <span class="icon-magnifiying-glass"></span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="title-holder">
+                                            <h4 class="product-title"><a href="{% url 'product:product_detail' product.slug %}">{{ product.name }}</a></h4>
+                                            <div class="rate-box">
+                                                {% if product.discount_price %}
+                                                    <p>{{ product.discount_price }} ₼</p>
+                                                    <span class="old-price">{{ product.price }} ₼</span>
+                                                {% else %}
+                                                    <p>{{ product.price }} ₼</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="button-box">
+                                                <div class="cart-button">
+                                                    <form method="POST" action="{% url 'product:product_detail' product.slug %}" id="addToCartForm">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn-one">
+                                                            <span class="txt">{% trans 'Səbətə at' %}</span>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            
+                                                <div class="other-button fav-area">
+                                                    <ul>
+                                                        <li>
+                                                            <span class="icon-love {% if product.id in favorites %} favorite {% endif %}" onclick="addToFavorites({{ product.id }})"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="product-style1-button text-center">
+                        <a class="btn-one" href="{% url 'product:products' %}"><span class="txt">{% trans 'Daha çox' %}</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-gallery-area">
+        <div class="layer-outer" style="background-image: url({% static 'images/shape/shape-bg-2.png' %})"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="video-holder-box"
+                        style="background-image: url({{ promotion.image.url }})">
+                        <div class="shape1 float-bob-y">
+                            <img src="{% static 'images/shape/shape-6.png' %}" alt="">
+                        </div>
+                        <div class="icon thm_bgclr1 wow zoomIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                            <a class="video-popup" title="Salvage Video Gallery"
+                                href="{{ promotion.video_link }}">
+                                <span class="icon-play-button"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-style1-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 text-right-rtl">
+                    <div class="faq-style1-content">
+                        <div class="sec-title">
+                            <div class="sub-title">
+                                <h4 class="thm_clr1">{% trans 'Suallar' %}</h4><span class="right"></span>
+                            </div>
+                            <h2>{% trans 'Tez-tez verilen suallar' %}</h2>
+                        </div>
+                        <div class="shape1"><img src="{% static 'images/shape/shape-3.png' %}" alt="" /></div>
+                        <div class="accordion-box">
+                            <div class="shape2 float-bob-y"><img class="paroller-2"
+                                    src="{% static 'images/shape/shape-2.png' %}" alt="" /></div>
+                                    
+                            {% for item in faq.questions.all %}
+                                <div class="accordion accordion-block">
+                                    <div class="accord-btn {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter }}">
+                                        <h4>{{ item.question }}</h4>
+                                    </div>
+                                    <div class="accord-content {% if forloop.first %}collapsed{% endif %}" id="content-{{ forloop.counter }}">
+                                        <p>{{ item.answer }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <div class="faq-style1-image-box">
+                        <div class="shape1 paroller"><img src="{% static 'images/shape/shape-4.png' %}" alt="" /></div>
+                        <div class="shape2"><img class="zoominout" src="{% static 'images/shape/shape-2.png' %}" alt="" />
+                        </div>
+                        <div class="shape3 paroller-2"><img src="{% static 'images/shape/shape-11.png' %}" alt="" /></div>
+                        <div class="inner">
+                            <img src="{{ faq.main_img.url }}" alt="">
+                        </div>
+                        <div class="overlay-image wow zoomIn" data-wow-delay="100ms" data-wow-duration="3500ms">
+                            <img src="{{ faq.other_img.url }}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-style1-area" id="partnors">
+        <div class="container-fullwidth">
+
+            <div class="testimonial-style1-content text-center-rtl">
+                <div class="inner-content">
+                    <div class="shape1 float-bob-y"><img src="{% static 'images/shape/shape-6.png" alt="" /></div>
+                    <div class="sec-title">
+                        <div class="sub-title text-center">
+                            <h4 class="thm_clr1">{% trans 'Partnyorlarımız' %}</h4><span class="right"></span>
+                        </div>
+                        <h2 class="text-center">{% trans 'Partnyorlarımızla tanış olun' %}</h2>
+                    </div>
+                    <div class="testimonial-carousel2 owl-carousel owl-theme owl-nav-style-one">
+                        {% for partner in partners %}
+                            <div class="single-testimonial-style1">
+                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="slogan-area"
+        style="background-image: url({% static 'images/parallax-background/slogan-area-bg.jpg' %})">
+        <div class="container">
+            <div class="slogan-content-box text-right-rtl">
+                <div class="title-box">
+                    <h2>{% trans 'Məhsullarımızı əldə etmək üçün istədiyiniz zaman zəng edə bilərsiniz' %} </h2>
+                </div>
+                <div class="button-box">
+                    <a class="btn-one" href="tel:{{ navigation_item.phone_number }"><span
+                            class="flaticon-phone-call-1 icon_phn txt"></span><span class="txt">{% trans 'Zəng' %} : {{ navigation_item.phone_number }} </span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fact-counter-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="fact-counter">
+                        <ul class="fact-counter-box clearfix d-flex justify-content-center">
+                            {% for item in statistics %}
+                                <li class="single-fact-counter wow fadeInUp text-center" data-wow-delay="100ms"
+                                    data-wow-duration="1500ms">
+                                    <div class="count-box">
+                                        <h2>
+                                            <span class="timer thm_clr1" data-from="1" data-to="{{ item.number }}" data-speed="5000"
+                                                data-refresh-interval="50">{{ item.number }}</span>
+                                        </h2>
+                                        <div class="sub-title">
+                                            <h5>{{ item.name }}</h5>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-style1-area">
+        <div class="container">
+            <div class="sec-title text-center">
+                <div class="sub-title">
+                    <span class="left"></span>
+                    <h4>{% trans 'Bloqlarımız' %}</h4><span class="right"></span>
+                </div>
+                <h2>{% trans 'Bloqlarımızla tanış olun' %}</h2>
+            </div>
+            <div class="row text-right-rtl">
+                {% for blog in last_3_blogs %}
+                    <div class="col-xl-4 col-lg-4 col-6">
+                        <div class="single-blog-style1 wow fadeInUp" data-wow-duration="1500ms">
+                            <div class="img-holder">
+                                <div class="inner">
+                                    <img src="{{ blog.image.url }}" alt="">
+                                </div>
+                            </div>
+                            <div class="text-holder">
+                                <h3 class="blog-title">
+                                    <a href="{% url 'blog:blog-details' blog.slug %}">{{ blog.title }}</a>
+                                </h3>
+                                <ul class="meta-info">
+                                    <li>{{ blog.created_at|date:"F j, Y" }}</li>
+                                </ul>
+                                <div class="text">
+                                    <p>{{ blog.description|slice:":40" }}</p>
+
+                                </div>
+                                <div class="button-box">
+                                    <a class="btn-one" href="{% url 'blog:blog-details' blog.slug %}"><span class="txt">{% trans 'Daha çox' %}</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        function addFav(productId) {
+            fetch(`/favorites/add/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: JSON.stringify({ 'product_id': productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const heartIcon = document.querySelector(`.icon-love[data-product-id="${productId}"]`);
+                    heartIcon.classList.add('favorite');
+                }
+            })
+            .catch(error => console.log('Error:', error));
+        }        
+    </script>
+
+{% endblock %}

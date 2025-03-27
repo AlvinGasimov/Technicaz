@@ -1,0 +1,146 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Haqqımızda' %}% {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Haqqımızda' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana Səhifə' %} </a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Haqqımızda' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-style1-area mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="about-style1-image-box clearfix">
+                        <div class="shape1"><img src="{% static 'images/shape/shape-5.png' %}" alt=""></div>
+                        <div class="shape2 float-bob-y"><img src="{% static 'images/shape/shape-6.png' %}" alt=""></div>
+                        <div class="shape3"><img class="paroller-2" src="{% static 'images/shape/shape-7.png' %}" alt=""></div>
+                        <div class="shape4 float-bob-y"><img src="{% static 'images/shape/shape-6.png' %}" alt=""></div>
+                        <div class="shape5 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="3500ms">
+                            <img class="paroller" src="{% static 'images/shape/shape-8.png' %}" alt="">
+                        </div>
+                        <div class="main-image">
+                            <div class="inner">
+                                <img src="{{ about.image.url }}" alt="">
+                            </div>
+                        </div>
+                        <div class="about-image-2 wow zoomIn" data-wow-delay="100ms" data-wow-duration="3500ms">
+                            <img src="{{ about.other_img.url }}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="about-style1-content-box text-right-rtl">
+                        <div class="sec-title">
+                            <div class="sub-title">
+                                <h4>{% trans 'Haqqımızda' %}% {{ about.title }}</h4><span class="right"></span>
+                            </div>
+                            <h2>{{ about.title }}</h2>
+                        </div>
+                        <div class="inner-content">
+                            <div class="text">
+                                <p> {{ about.description|safe }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="video-gallery-area">
+        <div class="layer-outer" style="background-image: url({% static 'images/shape/shape-bg-2.png' %})"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="video-holder-box"
+                        style="background-image: url({{ promotion.image.url }})">
+                        <div class="shape1 float-bob-y">
+                            <img src="{% static 'images/shape/shape-6.png' %}" alt="">
+                        </div>
+                        <div class="icon thm_bgclr1 wow zoomIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                            <a class="video-popup" title="Salvage Video Gallery"
+                                href="{{ promotion.video_link }}">
+                                <span class="icon-play-button"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-style1-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 text-right-rtl">
+                    <div class="faq-style1-content">
+                        <div class="sec-title">
+                            <div class="sub-title">
+                                <h4 class="thm_clr1">{% trans 'Suallar' %}</h4><span class="right"></span>
+                            </div>
+                            <h2>{% trans 'Tez-tez verilen suallar' %}</h2>
+                        </div>
+                        <div class="shape1"><img src="{% static 'images/shape/shape-3.png' %}" alt="" /></div>
+                        <div class="accordion-box">
+                            <div class="shape2 float-bob-y"><img class="paroller-2"
+                                    src="{% static 'images/shape/shape-2.png' %}" alt="" /></div>
+                                    
+                            {% for item in faq.questions.all %}
+                                <div class="accordion accordion-block">
+                                    <div class="accord-btn {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter }}">
+                                        <h4>{{ item.question }}</h4>
+                                    </div>
+                                    <div class="accord-content {% if forloop.first %}collapsed{% endif %}" id="content-{{ forloop.counter }}">
+                                        <p>{{ item.answer }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6">
+                    <div class="faq-style1-image-box">
+                        <div class="shape1 paroller"><img src="{% static 'images/shape/shape-4.png' %}" alt="" /></div>
+                        <div class="shape2"><img class="zoominout" src="{% static 'images/shape/shape-2.png' %}" alt="" />
+                        </div>
+                        <div class="shape3 paroller-2"><img src="{% static 'images/shape/shape-11.png' %}" alt="" /></div>
+                        <div class="inner">
+                            <img src="{{ faq.main_img.url }}" alt="">
+                        </div>
+                        <div class="overlay-image wow zoomIn" data-wow-delay="100ms" data-wow-duration="3500ms">
+                            <img src="{{ faq.other_img.url }}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

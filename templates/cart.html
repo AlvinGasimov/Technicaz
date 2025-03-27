@@ -1,0 +1,123 @@
+{% extends "partials/_base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %} {% trans 'Səbət' %} {% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-area" style="background-image: url({% static 'images/breadcrumb/breadcrumb-1.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="inner-content text-center clearfix">
+                        <div class="title wow slideInDown animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <h2>{% trans 'Səbət' %}</h2>
+                        </div>
+                        <div class="breadcrumb-menu wow slideInUp animated" data-wow-delay="0.2s"
+                            data-wow-duration="1000ms">
+                            <ul class="clearfix">
+                                <li><a href="{% url 'base:index' %}">{% trans 'Ana səhifə' %}</a></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                                <li class="active">{% trans 'Səbət' %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="checkout-area">
+        <div class="container">
+            <div class="row text-right-rtl">
+                {% if cart_items %}
+                <div class="col-sm-12">
+                    <div class="form order-info">
+                        <div class="title">
+                            <h3>{% trans 'Sifariş(lərin)iz' %}</h3>
+                        </div>
+    
+                        <div class="order-info-table-box">
+                            <div class="table-outer">
+                                <table class="order-table">
+                                    <thead class="order-header clearfix">
+                                        <tr>
+                                            <th class="prod-column">{% trans 'Məhsul' %}</th>
+                                            <th class="price-column">{% trans 'Qiymət' %}</th>
+                                            <th class="weight-column">{% trans 'Çəki' %}</th>
+                                            <th class="total-price-column">{% trans 'Ümumi Qiymət' %}</th>
+                                            <th>{% trans 'Sil' %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in cart_items %}
+                                        <tr>
+                                            <td class="prod-column">
+                                                <div class="column-box">
+                                                    <div class="prod-thumb">
+                                                        <a href="#"><img
+                                                                src="{{ item.product.image.url }}"
+                                                                alt="{{ item.product.name }}"></a>
+                                                    </div>
+                                                    <div class="title">
+                                                        <h3 class="prod-title">{{ item.product.name }}</h3>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="price-column">
+                                                {% if item.product.discount_price %}
+                                                    {{ item.product.discount_price|floatformat:2 }} ₼
+                                                {% else %}
+                                                    {{ item.product.price|floatformat:2 }} ₼
+                                                {% endif %}
+                                            </td>                                            
+                                            <td class="weight-column">{{ item.weight.value }} kg</td>
+                                            <td class="total-price-column">{{ item.total_price|floatformat:2 }} ₼</td>
+                                            <td>
+                                                <div class="remove">
+                                                    <form action="{% url 'shop:remove_from_cart' item.product.id item.id %}" method="post">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="flaticon-multiply"></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+    
+                                        <tr>
+                                            <td colspan="3">
+                                                <h3>{% trans 'Sifariş cəmi' %}</h3>
+                                            </td>
+                                            <td class="sub-total">{{ total_price|floatformat:2 }} ₼</td>
+                                        </tr>
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+    
+                        <div class="placeorder-button text-right">
+                            <a class="btn-one" href="{% url 'shop:create_order' %}">
+                                <span class="txt">{% trans 'Sifariş et' %}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="error-content text-center">
+                    <h4>{% trans 'Səbətiniz boşdur!' %}</h4>
+                    <div class="title thm_clr1"></div>
+                    <p>{% trans 'Alış-verişə davam edin!' %}</p>
+                    <div class="btns-box">
+                        <a class="btn-one" href="{% url 'base:index' %}"><span class="txt">{% trans 'Ana səhifə' %}</span></a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+        
+
+{% endblock %}
